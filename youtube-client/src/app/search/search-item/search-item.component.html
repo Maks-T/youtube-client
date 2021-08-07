@@ -1,10 +1,14 @@
 <div class="search-item__wrapper">
   <div class="search-item__img-wrapper">
-    <img class="search-item__img" alt="" />
+    <img
+      class="search-item__img"
+      alt=""
+      src="{{ item.snippet.thumbnails.medium.url }}"
+    />
     <div class="search-item__statistic-panel"></div>
   </div>
 
-  <h2>Kuji Podcast #</h2>
+  <h2>{{ item.snippet.title }}</h2>
 
   <button class="search-item__btn-more">more...</button>
 </div>

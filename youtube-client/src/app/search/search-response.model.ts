@@ -1,13 +1,13 @@
-import { Item } from './search-item.model';
+import { IItem } from './search-item.model';
 
-export interface Response {
+export interface IResponse {
   kind: string;
   etag: string;
-  pageInfo: PageInfo;
-  items: Item[];
+  pageInfo: IPageInfo;
+  items: IItem[];
 }
 
-interface PageInfo {
+interface IPageInfo {
   totalResults: number;
   resultsPerPage: number;
 }
