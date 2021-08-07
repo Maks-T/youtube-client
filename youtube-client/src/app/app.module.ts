@@ -6,13 +6,17 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header/header.component';
 import { SearchResultsComponent } from './search/search-results/search-results.component';
 import { SearchItemComponent } from './search/search-item/search-item.component';
+import { ShortTitlePipe } from './pipes/short-title.pipe';
+import { BottomColorDirective } from './directives/bottom-color.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     SearchResultsComponent,
-    SearchItemComponent
+    SearchItemComponent,
+    ShortTitlePipe,
+    BottomColorDirective
   ],
   imports: [
     BrowserModule,
