@@ -1,7 +1,15 @@
 <div class="search-filter__wrapper">
   <p class="search-filter__caption">Sorting by:</p>
-  <a class="search-filter__name"> date</a>
-  <a class="search-filter__name"> count of views</a>
-  <a class="search-filter__name"> word or sentence</a>
-  <input class="search-filter__input" />
+  <a class="search-filter__name" (click)="sortByType('date')"> date</a>
+  <a class="search-filter__name" (click)="sortByType('count-views')">
+    count of views</a
+  >
+  <a class="search-filter__name" (click)="sortByType('word-or-sentence')">
+    word or sentence</a
+  >
+  <input
+    class="search-filter__input"
+    [(ngModel)]="inputSearchFilter"
+    (input)="onChangeInput()"
+  />
 </div>

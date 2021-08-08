@@ -9,6 +9,8 @@ import { SearchItemComponent } from './components/search/search-item/search-item
 import { ShortTitlePipe } from './pipes/short-title.pipe';
 import { BottomColorDirective } from './directives/bottom-color.directive';
 import { SearchFilterComponent } from './components/search-filter/search-filter.component';
+import { FormsModule } from '@angular/forms';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -19,8 +21,9 @@ import { SearchFilterComponent } from './components/search-filter/search-filter.
     ShortTitlePipe,
     BottomColorDirective,
     SearchFilterComponent,
+    FilterPipe,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

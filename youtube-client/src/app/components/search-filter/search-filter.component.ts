@@ -1,15 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  OnChanges,
+} from '@angular/core';
 
 @Component({
   selector: 'app-search-filter',
   templateUrl: './search-filter.component.html',
-  styleUrls: ['./search-filter.component.scss']
+  styleUrls: ['./search-filter.component.scss'],
 })
 export class SearchFilterComponent implements OnInit {
+  @Output() onTypeSort: EventEmitter<string> = new EventEmitter<string>();
+  @Output() onInputText: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor() { }
+  inputSearchFilter = '';
 
-  ngOnInit(): void {
+  constructor() {}
+
+  ngOnInit(): void {}
+
+  onChangeInput() {
+    this.onInputText.emit(this.inputSearchFilter);
   }
 
+  sortByType(typeSort: string) {
+    this.onTypeSort.emit(typeSort);
+  }
 }

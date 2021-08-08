@@ -1,3 +1,11 @@
-<app-header></app-header>
-<app-search-filter></app-search-filter>
-<app-search-results></app-search-results>
+<app-header (onToggleFilter)="toggleFilter($event)"></app-header>
+<app-search-filter
+  *ngIf="filterShow"
+  (onTypeSort)="sortByType($event)"
+  (onInputText)="getInputText($event)"
+></app-search-filter>
+{{ typeSort }}
+<app-search-results
+  [typeSort]="typeSort"
+  [inputText]="inputText"
+></app-search-results>
