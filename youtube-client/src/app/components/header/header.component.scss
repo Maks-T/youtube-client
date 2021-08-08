@@ -16,12 +16,14 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 550px;
+  min-width: 320px;
+  max-width: 570px;
   height: 10vh;
 }
 
 .header-search__logo {
   display: flex;
+  flex-shrink: 0;
   justify-content: center;
   align-items: center;
   width: 50px;
@@ -41,6 +43,7 @@ header {
 
 .header-search__btn-search,
 .header-search__btn-setting {
+  flex-shrink: 0;
   height: 24px;
   width: 80px;
   border: none;
@@ -74,4 +77,20 @@ header {
 
   background: #2f80ed url("../../../assets/icons/settings.svg") no-repeat center
     center;
+}
+
+@media (max-width: 340px) {
+  header {
+    height: 10vh;
+  }
+
+  .header-search {
+    flex-wrap: wrap;
+    height: 10vh;
+  }
+
+  .header-search__input-search {
+    display: block !important;
+    width: 100px;
+  }
 }

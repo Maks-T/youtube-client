@@ -1,13 +1,13 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-search-filter',
   templateUrl: './search-filter.component.html',
   styleUrls: ['./search-filter.component.scss'],
 })
-export class SearchFilterComponent implements OnInit {
-  @Output() onTypeSort: EventEmitter<string> = new EventEmitter<string>();
-  @Output() onInputText: EventEmitter<string> = new EventEmitter<string>();
+export class SearchFilterComponent {
+  @Output() TypeSort: EventEmitter<string> = new EventEmitter<string>();
+  @Output() InputText: EventEmitter<string> = new EventEmitter<string>();
 
   typeSort = '';
 
@@ -15,14 +15,12 @@ export class SearchFilterComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
-
   onChangeInput() {
-    this.onInputText.emit(this.inputSearchFilter);
+    this.InputText.emit(this.inputSearchFilter);
   }
 
   sortByType(typeSort: string) {
-    this.onTypeSort.emit(typeSort);
+    this.TypeSort.emit(typeSort);
 
     this.typeSort = typeSort;
   }

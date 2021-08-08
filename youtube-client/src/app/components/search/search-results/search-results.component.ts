@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { mockResponse, mockResponseNull } from 'src/app/app.constants';
 import { IItem } from '../search-item.model';
 import { IResponse } from '../search-response.model';
@@ -8,14 +8,12 @@ import { IResponse } from '../search-response.model';
   templateUrl: './search-results.component.html',
   styleUrls: ['./search-results.component.scss'],
 })
-export class SearchResultsComponent implements OnInit, OnChanges {
+export class SearchResultsComponent implements OnChanges {
   mockResponse: IResponse = mockResponseNull;
 
   @Input() typeSort: string = '';
   @Input() inputText: string = '';
   @Input() searchText: string = '';
-
-  ngOnInit() {}
 
   ngOnChanges() {
     if (this.typeSort === 'date-up') {

@@ -9,25 +9,25 @@ export class HeaderComponent {
   filterShow: boolean = false;
   inputSearchText: string = '';
 
-  @Output() onToggleFilter: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() onSearch: EventEmitter<string> = new EventEmitter<string>();
+  @Output() ToggleFilter: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() Search: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() {}
 
-  onClickBtnSearch() {
+  clickBtnSearch() {
     if (this.inputSearchText.trim()) {
       this.filterShow = true;
     } else {
       this.filterShow = false;
     }
-    this.onToggleFilter.emit(this.filterShow);
+    this.ToggleFilter.emit(this.filterShow);
 
-    this.onSearch.emit(this.inputSearchText.trim());
+    this.Search.emit(this.inputSearchText.trim());
   }
 
   toggleFilter() {
     this.filterShow = !this.filterShow;
 
-    this.onToggleFilter.emit(this.filterShow);
+    this.ToggleFilter.emit(this.filterShow);
   }
 }
