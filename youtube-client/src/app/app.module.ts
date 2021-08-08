@@ -3,9 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header/header.component';
-import { SearchResultsComponent } from './search/search-results/search-results.component';
-import { SearchItemComponent } from './search/search-item/search-item.component';
+import { HeaderComponent } from './components/header/header.component';
+import { SearchResultsComponent } from './components/search/search-results/search-results.component';
+import { SearchItemComponent } from './components/search/search-item/search-item.component';
 import { ShortTitlePipe } from './pipes/short-title.pipe';
 import { BottomColorDirective } from './directives/bottom-color.directive';
 
@@ -16,13 +16,10 @@ import { BottomColorDirective } from './directives/bottom-color.directive';
     SearchResultsComponent,
     SearchItemComponent,
     ShortTitlePipe,
-    BottomColorDirective
+    BottomColorDirective,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

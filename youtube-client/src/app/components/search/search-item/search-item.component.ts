@@ -15,8 +15,9 @@ export class SearchItemComponent {
     const timeDifference: number =
       Number(new Date()) - Number(new Date(this.item.snippet.publishedAt));
 
-    const dayDifference = timeDifference / 86400000;
-    console.log('dayDifference ', dayDifference);
+    const countMillisecondInDay = 86400000;
+    const dayDifference = timeDifference / countMillisecondInDay;
+
     if (dayDifference < 7) {
       return 'blue';
     } else if (dayDifference < 30) {
