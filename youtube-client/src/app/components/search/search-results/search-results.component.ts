@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { mockResponse } from 'src/app/app.constants';
+import { mockResponse, mockResponseNull } from 'src/app/app.constants';
 import { IItem } from '../search-item.model';
 import { IResponse } from '../search-response.model';
 
@@ -9,18 +9,17 @@ import { IResponse } from '../search-response.model';
   styleUrls: ['./search-results.component.scss'],
 })
 export class SearchResultsComponent implements OnInit, OnChanges {
-  mockResponse: IResponse = mockResponse;
+  mockResponse: IResponse = mockResponseNull;
 
   @Input() typeSort: string = '';
   @Input() inputText: string = '';
-
-  constructor() {}
+  @Input() searchText: string = '';
 
   ngOnInit() {}
 
   ngOnChanges() {
     if (this.typeSort === 'date-up') {
-      this.mockResponse.items = mockResponse.items.sort(
+      this.mockResponse.items = this.mockResponse.items.sort(
         (a: IItem, b: IItem) =>
           Number(new Date(b.snippet.publishedAt)) -
           Number(new Date(a.snippet.publishedAt))
@@ -28,7 +27,7 @@ export class SearchResultsComponent implements OnInit, OnChanges {
     }
 
     if (this.typeSort === 'date-down') {
-      this.mockResponse.items = mockResponse.items.sort(
+      this.mockResponse.items = this.mockResponse.items.sort(
         (a: IItem, b: IItem) =>
           Number(new Date(a.snippet.publishedAt)) -
           Number(new Date(b.snippet.publishedAt))
@@ -36,17 +35,23 @@ export class SearchResultsComponent implements OnInit, OnChanges {
     }
 
     if (this.typeSort === 'count-views-up') {
-      this.mockResponse.items = mockResponse.items.sort(
+      this.mockResponse.items = this.mockResponse.items.sort(
         (a: IItem, b: IItem) =>
           Number(b.statistics.viewCount) - Number(a.statistics.viewCount)
       );
     }
 
     if (this.typeSort === 'count-views-down') {
-      this.mockResponse.items = mockResponse.items.sort(
+      this.mockResponse.items = this.mockResponse.items.sort(
         (a: IItem, b: IItem) =>
           Number(a.statistics.viewCount) - Number(b.statistics.viewCount)
       );
+    }
+
+    if (this.searchText) {
+      this.mockResponse = mockResponse;
+    } else {
+      this.mockResponse = mockResponseNull;
     }
   }
 }

@@ -5,8 +5,11 @@
       class="header-search__input-search"
       type="text"
       placeholder="What are you want to find out?"
+      [(ngModel)]="inputSearchText"
     />
-    <button class="header-search__btn-search">search</button>
+    <button class="header-search__btn-search" (click)="onClickBtnSearch()">
+      search
+    </button>
     <button
       class="header-search__btn-setting"
       (click)="toggleFilter()"

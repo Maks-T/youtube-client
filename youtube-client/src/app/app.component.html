@@ -1,11 +1,15 @@
-<app-header (onToggleFilter)="toggleFilter($event)"></app-header>
+<app-header
+  (onToggleFilter)="toggleFilter($event)"
+  (onSearch)="onSearch($event)"
+></app-header>
 <app-search-filter
   *ngIf="filterShow"
   (onTypeSort)="sortByType($event)"
   (onInputText)="getInputText($event)"
 ></app-search-filter>
-{{ typeSort }}
+
 <app-search-results
   [typeSort]="typeSort"
   [inputText]="inputText"
+  [searchText]="searchText"
 ></app-search-results>

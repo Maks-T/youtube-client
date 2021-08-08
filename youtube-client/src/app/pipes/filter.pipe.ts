@@ -12,7 +12,6 @@ export class FilterPipe implements PipeTransform {
   ): IItem[] {
     if (sortType !== 'word-or-sentence') return value;
     if (!inputText.trim()) return value;
-    console.log('filter-pipe', sortType, inputText);
 
     return value.filter((item) => {
       return item.snippet.tags?.filter((tag) => {

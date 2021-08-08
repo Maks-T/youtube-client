@@ -1,5 +1,15 @@
 import { IResponse } from './components/search/search-response.model';
 
+export const mockResponseNull: IResponse = {
+  kind: '',
+  etag: '',
+  pageInfo: {
+    totalResults: 0,
+    resultsPerPage: 0,
+  },
+  items: [],
+};
+
 export const mockResponse: IResponse = {
   kind: 'youtube#videoListResponse',
   etag: '"Fznwjl6JEQdo1MGvHOGaz_YanRU/Cmodw7c5XPTM8Yg3kMXelihxek4"',

@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Output,
-  EventEmitter,
-  OnChanges,
-} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-search-filter',
@@ -14,6 +8,8 @@ import {
 export class SearchFilterComponent implements OnInit {
   @Output() onTypeSort: EventEmitter<string> = new EventEmitter<string>();
   @Output() onInputText: EventEmitter<string> = new EventEmitter<string>();
+
+  typeSort = '';
 
   inputSearchFilter = '';
 
@@ -27,5 +23,7 @@ export class SearchFilterComponent implements OnInit {
 
   sortByType(typeSort: string) {
     this.onTypeSort.emit(typeSort);
+
+    this.typeSort = typeSort;
   }
 }

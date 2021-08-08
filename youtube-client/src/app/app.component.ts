@@ -13,11 +13,16 @@ export class AppComponent {
 
   typeSort: string = '';
   inputText: string = '';
+  searchText: string = '';
 
   public filterShow: boolean = false;
 
   toggleFilter(filterShow: boolean) {
     this.filterShow = filterShow;
+  }
+
+  onSearch(searchText: string) {
+    this.searchText = searchText;
   }
 
   sortByType(typeSort: string) {
