@@ -1,4 +1,6 @@
 header {
+  position: relative;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -79,14 +81,44 @@ header {
     center;
 }
 
-@media (max-width: 340px) {
+.login-info {
+  position: absolute;
+  right: 10%;
+
+  display: flex;
+  align-items: center;
+
+  padding-left: 100px;
+  height: 40px;
+  width: 200px;
+
+  background: url("../../../assets/icons/login.svg") no-repeat right center;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+
+  color: #4f4f4f;
+}
+@media (max-width: 1000px) {
   header {
-    height: 10vh;
+    height: 20vh;
   }
 
   .header-search {
+    height: 20vh;
+  }
+
+  .login-info {
+    top: 2vh;
+  }
+}
+
+@media (max-width: 340px) {
+  .header-search {
     flex-wrap: wrap;
-    height: 10vh;
   }
 
   .header-search__input-search {
