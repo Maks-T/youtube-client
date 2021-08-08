@@ -8,6 +8,7 @@ import { SearchResultsComponent } from './components/search/search-results/searc
 import { SearchItemComponent } from './components/search/search-item/search-item.component';
 import { ShortTitlePipe } from './pipes/short-title.pipe';
 import { BottomColorDirective } from './directives/bottom-color.directive';
+import { SearchFilterComponent } from './components/search-filter/search-filter.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { BottomColorDirective } from './directives/bottom-color.directive';
     SearchItemComponent,
     ShortTitlePipe,
     BottomColorDirective,
+    SearchFilterComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],

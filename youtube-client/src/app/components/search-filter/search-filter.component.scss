@@ -1,0 +1,40 @@
+.search-filter__wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 50px;
+  background: #e5e5e5;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+
+  .search-filter__caption {
+    color: #929292;
+  }
+
+  .search-filter__name {
+    padding: 0 5px;
+    margin: 0;
+    color: #2f80ec;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .search-filter__input {
+    height: 13px;
+    width: 149px;
+
+    margin-left: 10px;
+
+    border-radius: 0px;
+    border: none;
+
+    outline: none;
+    background-color: #fff;
+  }
+}
