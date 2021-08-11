@@ -1,5 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IItem } from '../search-item.model';
+
+const countMillisecondInDay = 86400000;
+const Month = 30;
+const Week = 7;
+const Medium = 182;
 
 @Component({
   selector: 'app-search-item',
@@ -13,14 +18,13 @@ export class SearchItemComponent {
     const timeDifference: number =
       Number(new Date()) - Number(new Date(this.item.snippet.publishedAt));
 
-    const countMillisecondInDay = 86400000;
     const dayDifference = timeDifference / countMillisecondInDay;
 
-    if (dayDifference < 7) {
+    if (dayDifference < Week) {
       return 'blue';
-    } else if (dayDifference < 30) {
+    } else if (dayDifference < Month) {
       return 'green';
-    } else if (dayDifference < 182) {
+    } else if (dayDifference < Medium) {
       return 'yellow';
     } else {
       return 'red';
