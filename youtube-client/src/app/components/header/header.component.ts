@@ -12,12 +12,9 @@ export class HeaderComponent {
   @Output() ToggleFilter: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() Search: EventEmitter<string> = new EventEmitter<string>();
 
-  clickBtnSearch() {
-    if (this.inputSearchText.trim()) {
-      this.filterShow = true;
-    } else {
-      this.filterShow = false;
-    }
+  clickBtnSearch(): void {
+    this.filterShow = !!this.inputSearchText.trim();
+
     this.ToggleFilter.emit(this.filterShow);
 
     this.Search.emit(this.inputSearchText.trim());
