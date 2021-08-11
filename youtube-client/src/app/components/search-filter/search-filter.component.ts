@@ -1,4 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
+import { TypeSort } from './type-sort.model';
 
 @Component({
   selector: 'app-search-filter',
@@ -6,7 +7,9 @@ import { Component, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./search-filter.component.scss'],
 })
 export class SearchFilterComponent {
-  @Output() TypeSort: EventEmitter<string> = new EventEmitter<string>();
+  TS = TypeSort;
+
+  @Output() TSort: EventEmitter<string> = new EventEmitter<string>();
   @Output() InputText: EventEmitter<string> = new EventEmitter<string>();
 
   typeSort = '';
@@ -18,7 +21,7 @@ export class SearchFilterComponent {
   }
 
   sortByType(typeSort: string): void {
-    this.TypeSort.emit(typeSort);
+    this.TSort.emit(typeSort);
 
     this.typeSort = typeSort;
   }

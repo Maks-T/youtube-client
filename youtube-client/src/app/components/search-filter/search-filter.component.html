@@ -2,25 +2,25 @@
   <p class="search-filter__caption">Sorting by:</p>
   <a
     class="search-filter__name"
-    (click)="sortByType('date')"
-    [ngStyle]="{ textDecoration: typeSort === 'date' ? 'none' : 'underline' }"
+    (click)="sortByType(TS.date)"
+    [ngStyle]="{ textDecoration: typeSort === TS.date ? 'none' : 'underline' }"
   >
     date</a
   >
   <a
     class="search-filter__name"
-    (click)="sortByType('count-views')"
+    (click)="sortByType(TS.countViews)"
     [ngStyle]="{
-      textDecoration: typeSort === 'count-views' ? 'none' : 'underline'
+      textDecoration: typeSort === TS.countViews ? 'none' : 'underline'
     }"
   >
     count of views</a
   >
   <a
     class="search-filter__name"
-    (click)="sortByType('word-or-sentence')"
+    (click)="sortByType(TS.wordOrSentence)"
     [ngStyle]="{
-      textDecoration: typeSort === 'word-or-sentence' ? 'none' : 'undercase'
+      textDecoration: typeSort === TS.wordOrSentence ? 'none' : 'undercase'
     }"
   >
     word or sentence</a

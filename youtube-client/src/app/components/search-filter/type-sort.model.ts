@@ -1,4 +1,4 @@
-export enum ETypeSort {
+export enum TypeSort {
   date = 'date',
   dateUp = 'date-up',
   dateDown = 'date-down',

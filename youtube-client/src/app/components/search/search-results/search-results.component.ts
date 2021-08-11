@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { mockResponse, mockResponseNull } from 'src/app/app.constants';
+import { TypeSort } from '../../search-filter/type-sort.model';
 import { IItem } from '../search-item.model';
 import { IResponse } from '../search-response.model';
 
@@ -16,7 +17,7 @@ export class SearchResultsComponent implements OnChanges {
   @Input() searchText: string = '';
 
   ngOnChanges(): void {
-    if (this.typeSort === 'date-up') {
+    if (this.typeSort === TypeSort.dateUp) {
       this.mockResponse.items = this.mockResponse.items.sort(
         (a: IItem, b: IItem) =>
           Number(new Date(b.snippet.publishedAt)) -
@@ -24,7 +25,7 @@ export class SearchResultsComponent implements OnChanges {
       );
     }
 
-    if (this.typeSort === 'date-down') {
+    if (this.typeSort === TypeSort.dateDown) {
       this.mockResponse.items = this.mockResponse.items.sort(
         (a: IItem, b: IItem) =>
           Number(new Date(a.snippet.publishedAt)) -
@@ -32,14 +33,14 @@ export class SearchResultsComponent implements OnChanges {
       );
     }
 
-    if (this.typeSort === 'count-views-up') {
+    if (this.typeSort === TypeSort.countViews) {
       this.mockResponse.items = this.mockResponse.items.sort(
         (a: IItem, b: IItem) =>
           Number(b.statistics.viewCount) - Number(a.statistics.viewCount)
       );
     }
 
-    if (this.typeSort === 'count-views-down') {
+    if (this.typeSort === TypeSort.countViewsDown) {
       this.mockResponse.items = this.mockResponse.items.sort(
         (a: IItem, b: IItem) =>
           Number(a.statistics.viewCount) - Number(b.statistics.viewCount)

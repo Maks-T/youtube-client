@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ETypeSort } from './components/search-filter/type-sort.model';
+import { TypeSort } from './components/search-filter/type-sort.model';
 
 @Component({
   selector: 'app-root',
@@ -27,26 +27,26 @@ export class AppComponent {
   }
 
   sortByType(typeSort: string): void {
-    if (typeSort === ETypeSort.date) {
+    if (typeSort === TypeSort.date) {
       this.sortDateUp = !this.sortDateUp;
       if (this.sortDateUp) {
-        this.typeSort = ETypeSort.dateUp;
+        this.typeSort = TypeSort.dateUp;
       } else {
-        this.typeSort = ETypeSort.dateDown;
+        this.typeSort = TypeSort.dateDown;
       }
     }
 
-    if (typeSort === ETypeSort.countViews) {
+    if (typeSort === TypeSort.countViews) {
       this.sortCountViewsUp = !this.sortCountViewsUp;
       if (this.sortCountViewsUp) {
-        this.typeSort = ETypeSort.countViewsUp;
+        this.typeSort = TypeSort.countViewsUp;
       } else {
-        this.typeSort = ETypeSort.countViewsDown;
+        this.typeSort = TypeSort.countViewsDown;
       }
     }
 
-    if (typeSort === ETypeSort.wordOrSentence) {
-      this.typeSort = ETypeSort.wordOrSentence;
+    if (typeSort === TypeSort.wordOrSentence) {
+      this.typeSort = TypeSort.wordOrSentence;
     }
   }
 
