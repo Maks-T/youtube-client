@@ -1,45 +1,46 @@
-export interface Item {
+export interface IItem {
   kind: string;
   etag: string;
   id: string;
-  snippet: Snippet;
-  statistics: Statistics;
+  snippet: ISnippet;
+  statistics: IStatistics;
 }
 
-export interface Snippet {
+export interface ISnippet {
   publishedAt: string;
   channelId: string;
   title: string;
   description: string;
-  thumbnails: Thumbnails;
+  thumbnails: IThumbnails;
   channelTitle: string;
   tags?: string[] | null;
   categoryId: string;
   liveBroadcastContent: string;
-  localized: Localized;
+  defaultLanguage?: string;
+  localized: ILocalized;
   defaultAudioLanguage: string;
 }
 
-export interface Thumbnails {
-  default: Sizes;
-  medium: Sizes;
-  high: Sizes;
-  standard: Sizes;
-  maxres: Sizes;
+export interface IThumbnails {
+  default: ISizes;
+  medium: ISizes;
+  high: ISizes;
+  standard: ISizes;
+  maxres: ISizes;
 }
 
-export interface Sizes {
+export interface ISizes {
   url: string;
   width: number;
   height: number;
 }
 
-export interface Localized {
+export interface ILocalized {
   title: string;
   description: string;
 }
 
-export interface Statistics {
+export interface IStatistics {
   viewCount: string;
   likeCount: string;
   dislikeCount: string;

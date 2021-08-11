@@ -1,0 +1,128 @@
+header {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 10vh;
+  background: #e5e5e5;
+
+  color: white;
+  font-weight: bold;
+  font-size: 28px;
+}
+
+.header-search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 320px;
+  max-width: 570px;
+  height: 10vh;
+}
+
+.header-search__logo {
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+
+  background: url("../../../assets/icons/logo.svg");
+}
+
+.header-search__input-search {
+  width: 396px;
+  height: 24px;
+  margin-left: 10px;
+  border: none;
+  background: #efefef;
+  outline: none;
+}
+
+.header-search__btn-search,
+.header-search__btn-setting {
+  flex-shrink: 0;
+  height: 24px;
+  width: 80px;
+  border: none;
+  border-radius: 0px 4px 4px 0px;
+  background: #2f80ed;
+  outline: none;
+
+  color: white;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 14px;
+
+  &:hover {
+    opacity: 0.9;
+    box-shadow: 2px 2px 5px 0px #2f80ed;
+  }
+
+  &:active {
+    transform: translate(1px, 1px);
+    transition: 0.1s;
+  }
+}
+
+.header-search__btn-setting {
+  height: 24px;
+  width: 24px;
+  margin-left: 10px;
+  border-radius: 4px;
+
+  background: #2f80ed url("../../../assets/icons/settings.svg") no-repeat center
+    center;
+}
+
+.login-info {
+  position: absolute;
+  right: 10%;
+
+  display: flex;
+  align-items: center;
+
+  padding-left: 100px;
+  height: 40px;
+  width: 200px;
+
+  background: url("../../../assets/icons/login.svg") no-repeat right center;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+
+  color: #4f4f4f;
+}
+@media (max-width: 1000px) {
+  header {
+    height: 20vh;
+  }
+
+  .header-search {
+    height: 20vh;
+  }
+
+  .login-info {
+    top: 2vh;
+  }
+}
+
+@media (max-width: 340px) {
+  .header-search {
+    flex-wrap: wrap;
+  }
+
+  .header-search__input-search {
+    display: block !important;
+    width: 100px;
+  }
+}

@@ -1,0 +1,33 @@
+<div class="search-item__wrapper" appBottomColor [cardColor]="getColor()">
+  <div class="search-item__img-wrapper">
+    <img
+      class="search-item__img"
+      alt=""
+      [src]="
+        item.snippet.thumbnails.medium.url
+          ? item.snippet.thumbnails.medium.url
+          : item.snippet.thumbnails.default.url
+      "
+    />
+    <div class="search-item__statistic-panel">
+      <div class="search-item__view-count search-item__count">
+        {{ item.statistics.viewCount }}
+      </div>
+      <div class="search-item__like-count search-item__count">
+        {{ item.statistics.likeCount }}
+      </div>
+      <div class="search-item__dislike-count search-item__count">
+        {{ item.statistics.dislikeCount }}
+      </div>
+      <div class="search-item__comment-count search-item__count">
+        {{ item.statistics.commentCount }}
+      </div>
+    </div>
+  </div>
+
+  <h2 class="search-item__title">
+    {{ item.snippet.title | titlecase | shortTitle: 35 }}
+  </h2>
+
+  <button class="search-item__btn-more">more...</button>
+</div>
