@@ -9,9 +9,7 @@ import { IItem } from '../search-item.model';
 export class SearchItemComponent {
   @Input() item!: IItem;
 
-  constructor() {}
-
-  getColor() {
+  getColor(): string {
     const timeDifference: number =
       Number(new Date()) - Number(new Date(this.item.snippet.publishedAt));
 

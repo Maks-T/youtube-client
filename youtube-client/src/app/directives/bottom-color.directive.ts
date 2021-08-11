@@ -8,7 +8,7 @@ export class BottomColorDirective implements OnInit {
   @HostBinding('style.borderBottomColor') public borderBottomColor: string =
     this.cardColor;
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.borderBottomColor = this.cardColor;
   }
 }

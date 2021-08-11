@@ -15,7 +15,7 @@ export class SearchResultsComponent implements OnChanges {
   @Input() inputText: string = '';
   @Input() searchText: string = '';
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     if (this.typeSort === 'date-up') {
       this.mockResponse.items = this.mockResponse.items.sort(
         (a: IItem, b: IItem) =>

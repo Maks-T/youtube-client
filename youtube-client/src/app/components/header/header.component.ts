@@ -12,8 +12,6 @@ export class HeaderComponent {
   @Output() ToggleFilter: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() Search: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor() {}
-
   clickBtnSearch() {
     if (this.inputSearchText.trim()) {
       this.filterShow = true;
@@ -25,7 +23,7 @@ export class HeaderComponent {
     this.Search.emit(this.inputSearchText.trim());
   }
 
-  toggleFilter() {
+  toggleFilter(): void {
     this.filterShow = !this.filterShow;
 
     this.ToggleFilter.emit(this.filterShow);

@@ -18,15 +18,15 @@ export class AppComponent {
 
   public filterShow: boolean = false;
 
-  toggleFilter(filterShow: boolean) {
+  toggleFilter(filterShow: boolean): void {
     this.filterShow = filterShow;
   }
 
-  onSearch(searchText: string) {
+  onSearch(searchText: string): void {
     this.searchText = searchText;
   }
 
-  sortByType(typeSort: string) {
+  sortByType(typeSort: string): void {
     if (typeSort === ETypeSort.date) {
       this.sortDateUp = !this.sortDateUp;
       if (this.sortDateUp) {
@@ -50,7 +50,7 @@ export class AppComponent {
     }
   }
 
-  getInputText(inputText: string) {
+  getInputText(inputText: string): void {
     this.inputText = inputText;
   }
 }

@@ -13,13 +13,11 @@ export class SearchFilterComponent {
 
   inputSearchFilter = '';
 
-  constructor() {}
-
-  onChangeInput() {
+  onChangeInput(): void {
     this.InputText.emit(this.inputSearchFilter);
   }
 
-  sortByType(typeSort: string) {
+  sortByType(typeSort: string): void {
     this.TypeSort.emit(typeSort);
 
     this.typeSort = typeSort;
