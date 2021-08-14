@@ -5,6 +5,8 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { SearchItemComponent } from './components/search/search-item/search-item.component';
 import { SearchResultsComponent } from './components/search/search-results/search-results.component';
 import { ShortTitlePipe } from './pipes/short-title.pipe';
+import { RouterModule } from '@angular/router';
+import { DetailedInfoComponent } from './components/detailed-info/detailed-info.component';
 
 @NgModule({
   declarations: [
@@ -13,8 +15,21 @@ import { ShortTitlePipe } from './pipes/short-title.pipe';
     ShortTitlePipe,
     BottomColorDirective,
     FilterPipe,
+    DetailedInfoComponent,
   ],
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    RouterModule.forChild([
+      {
+        path: '',
+        component: SearchResultsComponent,
+      },
+      {
+        path: ':itemId',
+        component: DetailedInfoComponent,
+      },
+    ]),
+  ],
   exports: [
     SearchResultsComponent,
     SearchItemComponent,

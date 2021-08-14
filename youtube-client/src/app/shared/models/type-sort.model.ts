@@ -6,4 +6,5 @@ export enum TypeSort {
   countViewsUp = 'count-views-up',
   countViewsDown = 'count-views-down',
   wordOrSentence = 'word-or-sentence',
+  empty = '',
 }

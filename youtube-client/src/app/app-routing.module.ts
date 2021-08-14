@@ -8,6 +8,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('src/app/auth/auth.module').then((m) => m.AuthModule),
   },
+  {
+    path: 'search',
+    loadChildren: () =>
+      import('src/app/youtube/youtube.module').then((m) => m.YoutubeModule),
+  },
 ];
 
 @NgModule({

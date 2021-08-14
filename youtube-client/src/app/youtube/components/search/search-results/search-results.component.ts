@@ -1,5 +1,6 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component } from '@angular/core';
 import { mockResponse, mockResponseNull } from 'src/app/app.constants';
+import { SearchService } from 'src/app/core/services/search.service';
 import { TypeSort } from '../../../../shared/models/type-sort.model';
 import { IItem } from '../../../models/search-item.model';
 import { IResponse } from '../../../models/search-response.model';
@@ -9,14 +10,35 @@ import { IResponse } from '../../../models/search-response.model';
   templateUrl: './search-results.component.html',
   styleUrls: ['./search-results.component.scss'],
 })
-export class SearchResultsComponent implements OnChanges {
+export class SearchResultsComponent {
   mockResponse: IResponse = mockResponseNull;
 
-  @Input() typeSort: string = '';
-  @Input() inputText: string = '';
-  @Input() searchText: string = '';
+  sortDateUp = false;
+  sortCountViewsUp = false;
 
-  ngOnChanges(): void {
+  searchText: string = '';
+  searchFilterText: string = '';
+
+  typeSort: string = '';
+
+  constructor(public searchService: SearchService) {
+    searchService.searchText.subscribe((searchText) => {
+      this.searchText = searchText;
+      this.onSearch();
+    });
+
+    searchService.searchFilterText.subscribe((searchFilterText) => {
+      this.searchFilterText = searchFilterText;
+    });
+
+    searchService.typeSort.subscribe((typeSort) => {
+      this.typeSort = typeSort;
+      this.sortByType();
+      this.sortByDirection();
+    });
+  }
+
+  sortByDirection(): void {
     if (this.typeSort === TypeSort.dateUp) {
       this.mockResponse.items = this.mockResponse.items.sort(
         (a: IItem, b: IItem) =>
@@ -33,7 +55,7 @@ export class SearchResultsComponent implements OnChanges {
       );
     }
 
-    if (this.typeSort === TypeSort.countViews) {
+    if (this.typeSort === TypeSort.countViewsUp) {
       this.mockResponse.items = this.mockResponse.items.sort(
         (a: IItem, b: IItem) =>
           Number(b.statistics.viewCount) - Number(a.statistics.viewCount)
@@ -46,11 +68,31 @@ export class SearchResultsComponent implements OnChanges {
           Number(a.statistics.viewCount) - Number(b.statistics.viewCount)
       );
     }
+  }
 
+  sortByType(): void {
+    if (this.typeSort === TypeSort.date) {
+      this.sortDateUp = !this.sortDateUp;
+      this.typeSort = this.sortDateUp ? TypeSort.dateUp : TypeSort.dateDown;
+    }
+
+    if (this.typeSort === TypeSort.countViews) {
+      this.sortCountViewsUp = !this.sortCountViewsUp;
+      this.typeSort = this.sortCountViewsUp
+        ? TypeSort.countViewsUp
+        : TypeSort.countViewsDown;
+    }
+
+    if (this.typeSort === TypeSort.wordOrSentence) {
+      this.typeSort = TypeSort.wordOrSentence;
+    }
+  }
+
+  onSearch(): void {
     if (this.searchText) {
-      this.mockResponse = mockResponse;
+      this.mockResponse = JSON.parse(JSON.stringify(mockResponse));
     } else {
-      this.mockResponse = mockResponseNull;
+      this.mockResponse = JSON.parse(JSON.stringify(mockResponseNull));
     }
   }
 }

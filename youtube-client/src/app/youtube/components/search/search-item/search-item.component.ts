@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { IItem } from 'src/app/youtube/models/search-item.model';
 
 const countMillisecondInDay = 86400000;
@@ -13,6 +14,8 @@ const Medium = 182;
 })
 export class SearchItemComponent {
   @Input() item!: IItem;
+
+  constructor(private router: Router) {}
 
   getColor(): string {
     const timeDifference: number =
@@ -29,5 +32,10 @@ export class SearchItemComponent {
     } else {
       return 'red';
     }
+  }
+
+  public goToDetailsPage(id: string): void {
+    // console.log('check the details of: ' + id);
+    this.router.navigate(['search', id]);
   }
 }

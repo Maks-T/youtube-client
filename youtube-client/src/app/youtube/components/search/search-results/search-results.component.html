@@ -1,6 +1,6 @@
 <div class=".search-results__wrapper" *ngIf="mockResponse.items.length">
   <app-search-item
-    *ngFor="let item of mockResponse.items | filter: typeSort:inputText"
+    *ngFor="let item of mockResponse.items | filter: typeSort:searchFilterText"
     [item]="item"
   >
   </app-search-item>

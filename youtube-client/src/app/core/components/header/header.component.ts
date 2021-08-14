@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
+import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-header',
@@ -9,20 +10,17 @@ export class HeaderComponent {
   filterShow: boolean = false;
   inputSearchText: string = '';
 
-  @Output() ToggleFilter: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() Search: EventEmitter<string> = new EventEmitter<string>();
+  constructor(public searchService: SearchService) {}
 
   clickBtnSearch(): void {
     this.filterShow = !!this.inputSearchText.trim();
-
-    this.ToggleFilter.emit(this.filterShow);
-
-    this.Search.emit(this.inputSearchText.trim());
+    this.searchService.searchText.next(this.inputSearchText);
   }
 
   toggleFilter(): void {
+    console.log('this.filterShow', this.filterShow);
     this.filterShow = !this.filterShow;
-
-    this.ToggleFilter.emit(this.filterShow);
   }
+
+  cli(): void {}
 }
