@@ -9,8 +9,9 @@ import { SearchItemComponent } from './components/search/search-item/search-item
 import { ShortTitlePipe } from './pipes/short-title.pipe';
 import { BottomColorDirective } from './directives/bottom-color.directive';
 import { SearchFilterComponent } from './components/search-filter/search-filter.component';
-import { FormsModule } from '@angular/forms';
 import { FilterPipe } from './pipes/filter.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,13 @@ import { FilterPipe } from './pipes/filter.pipe';
     SearchFilterComponent,
     FilterPipe,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    SharedModule,
+  ],
+  exports: [SharedModule],
   providers: [],
   bootstrap: [AppComponent],
 })

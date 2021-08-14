@@ -2,6 +2,9 @@
   (ToggleFilter)="toggleFilter($event)"
   (Search)="onSearch($event)"
 ></app-header>
+
+<router-outlet></router-outlet>
+
 <app-search-filter
   *ngIf="filterShow"
   (TSort)="sortByType($event)"
