@@ -6,8 +6,8 @@
       <img
         class="detailed-info__image"
         [src]="
-          item.snippet.thumbnails.medium.url
-            ? item.snippet.thumbnails.medium.url
+          item.snippet.thumbnails.high.url
+            ? item.snippet.thumbnails.high.url
             : item.snippet.thumbnails.default.url
         "
       />
@@ -26,16 +26,16 @@
       </div>
       <div class="detailed-info__statistics">
         <div class="detailed-info__statistic-panel">
-          <div class="detailed-info__view-count search-item__count">
+          <div class="detailed-info__view-count detailed-info__count">
             {{ item.statistics.viewCount }}
           </div>
-          <div class="detailed-info__like-count search-item__count">
+          <div class="detailed-info__like-count detailed-info__count">
             {{ item.statistics.likeCount }}
           </div>
-          <div class="detailed-info__dislike-count search-item__count">
+          <div class="detailed-info__dislike-count detailed-info__count">
             {{ item.statistics.dislikeCount }}
           </div>
-          <div class="detailed-info__comment-count search-item__count">
+          <div class="detailed-info__comment-count detailed-info__count">
             {{ item.statistics.commentCount }}
           </div>
         </div>

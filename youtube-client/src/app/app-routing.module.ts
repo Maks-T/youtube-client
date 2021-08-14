@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { Page404Component } from './shared/components/page404/page404.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -13,6 +14,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('src/app/youtube/youtube.module').then((m) => m.YoutubeModule),
   },
+  { path: '**', component: Page404Component },
 ];
 
 @NgModule({
