@@ -3,34 +3,24 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component';
-import { SearchResultsComponent } from './components/search/search-results/search-results.component';
-import { SearchItemComponent } from './components/search/search-item/search-item.component';
-import { ShortTitlePipe } from './pipes/short-title.pipe';
-import { BottomColorDirective } from './directives/bottom-color.directive';
-import { SearchFilterComponent } from './components/search-filter/search-filter.component';
-import { FilterPipe } from './pipes/filter.pipe';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
+import { HeaderComponent } from './core/components/header/header.component';
+import { CoreModule } from './core/core.module';
+import { YoutubeModule } from './youtube/youtube.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    SearchResultsComponent,
-    SearchItemComponent,
-    ShortTitlePipe,
-    BottomColorDirective,
-    SearchFilterComponent,
-    FilterPipe,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
+    CoreModule,
+    YoutubeModule,
   ],
-  exports: [SharedModule],
+  exports: [SharedModule, CoreModule, YoutubeModule],
   providers: [],
   bootstrap: [AppComponent],
 })

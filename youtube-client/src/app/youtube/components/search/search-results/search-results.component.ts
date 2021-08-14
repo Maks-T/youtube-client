@@ -1,8 +1,8 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { mockResponse, mockResponseNull } from 'src/app/app.constants';
-import { TypeSort } from '../../search-filter/type-sort.model';
-import { IItem } from '../search-item.model';
-import { IResponse } from '../search-response.model';
+import { TypeSort } from '../../../../shared/models/type-sort.model';
+import { IItem } from '../../../models/search-item.model';
+import { IResponse } from '../../../models/search-response.model';
 
 @Component({
   selector: 'app-search-results',

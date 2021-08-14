@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IItem } from '../search-item.model';
+import { IItem } from 'src/app/youtube/models/search-item.model';
 
 const countMillisecondInDay = 86400000;
 const Month = 30;

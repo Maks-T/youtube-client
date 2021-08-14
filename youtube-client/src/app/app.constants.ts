@@ -1,4 +1,4 @@
-import { IResponse } from './components/search/search-response.model';
+import { IResponse } from './youtube/models/search-response.model';
 
 export const mockResponseNull: IResponse = {
   kind: '',

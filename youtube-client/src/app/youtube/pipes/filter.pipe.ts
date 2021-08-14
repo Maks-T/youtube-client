@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { TypeSort } from '../components/search-filter/type-sort.model';
-import { IItem } from '../components/search/search-item.model';
+import { TypeSort } from '../../shared/models/type-sort.model';
+import { IItem } from '../models/search-item.model';
 
 @Pipe({
   name: 'filter',

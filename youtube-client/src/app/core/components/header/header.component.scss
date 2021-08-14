@@ -31,7 +31,7 @@ header {
   width: 50px;
   height: 50px;
 
-  background: url("../../../assets/icons/logo.svg");
+  background: url("../../../../assets/icons/logo.svg");
 }
 
 .header-search__input-search {
@@ -77,8 +77,8 @@ header {
   margin-left: 10px;
   border-radius: 4px;
 
-  background: #2f80ed url("../../../assets/icons/settings.svg") no-repeat center
-    center;
+  background: #2f80ed url("../../../../assets/icons/settings.svg") no-repeat
+    center center;
 }
 
 .login-info {
@@ -92,7 +92,7 @@ header {
   height: 40px;
   width: 200px;
 
-  background: url("../../../assets/icons/login.svg") no-repeat right center;
+  background: url("../../../../assets/icons/login.svg") no-repeat right center;
 
   font-family: Roboto;
   font-style: normal;

@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { TypeSort } from './type-sort.model';
+import { TypeSort } from '../../../shared/models/type-sort.model';
 
 @Component({
   selector: 'app-search-filter',
