@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { SharedModule } from '../shared/shared.module';
-import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [LoginFormComponent],

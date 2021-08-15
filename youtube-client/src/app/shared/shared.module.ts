@@ -8,7 +8,7 @@ import { Page404Component } from './components/page404/page404.component';
 
 @NgModule({
   declarations: [
-    Page404Component
+    Page404Component,
   ],
   imports: [
     CommonModule,

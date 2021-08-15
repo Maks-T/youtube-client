@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { TypeSort } from './shared/models/type-sort.model';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +7,4 @@ import { TypeSort } from './shared/models/type-sort.model';
 })
 export class AppComponent {
   title = 'youtube-client';
-
-  typeSort: string = '';
-  inputText: string = '';
-  searchText: string = '';
-
-  public filterShow: boolean = false;
 }

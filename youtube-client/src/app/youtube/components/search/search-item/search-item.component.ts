@@ -18,20 +18,18 @@ export class SearchItemComponent {
   constructor(private router: Router) {}
 
   getColor(): string {
-    const timeDifference: number =
-      Number(new Date()) - Number(new Date(this.item.snippet.publishedAt));
+    const timeDifference: number = Number(new Date()) - Number(new Date(this.item.snippet.publishedAt));
 
     const dayDifference = timeDifference / countMillisecondInDay;
 
     if (dayDifference < Week) {
       return 'blue';
-    } else if (dayDifference < Month) {
+    } if (dayDifference < Month) {
       return 'green';
-    } else if (dayDifference < Medium) {
+    } if (dayDifference < Medium) {
       return 'yellow';
-    } else {
-      return 'red';
     }
+    return 'red';
   }
 
   public goToDetailsPage(id: string): void {

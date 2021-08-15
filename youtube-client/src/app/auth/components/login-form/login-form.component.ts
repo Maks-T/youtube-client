@@ -11,12 +11,14 @@ import { AuthService } from '../../sevices/auth.service';
 })
 export class LoginFormComponent implements OnInit {
   public email = new FormControl('', [Validators.required, Validators.email]);
+
   public password = new FormControl('', [
     Validators.required,
     Validators.minLength(2),
   ]);
 
   public hide = true;
+
   public form!: FormGroup;
 
   constructor(private router: Router, private authService: AuthService) {}

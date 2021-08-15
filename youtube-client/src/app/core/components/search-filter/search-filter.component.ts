@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 import { TypeSort } from '../../../shared/models/type-sort.model';
 import { SearchService } from '../../services/search.service';
 

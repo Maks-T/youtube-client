@@ -9,15 +9,11 @@ export class FilterPipe implements PipeTransform {
   transform(
     value: IItem[],
     sortType: string = '',
-    inputText: string = ''
+    inputText: string = '',
   ): IItem[] {
     if (sortType !== TypeSort.wordOrSentence) return value;
     if (!inputText.trim()) return value;
 
-    return value.filter((item) => {
-      return item.snippet.tags?.filter((tag) => {
-        return tag.toLowerCase().includes(inputText.toLowerCase());
-      }).length;
-    });
+    return value.filter((item) => item.snippet.tags?.filter((tag) => tag.toLowerCase().includes(inputText.toLowerCase())).length);
   }
 }

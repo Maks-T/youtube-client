@@ -9,9 +9,9 @@ export class SearchService {
   public searchText: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   public searchFilterText: BehaviorSubject<string> =
-    new BehaviorSubject<string>('');
+  new BehaviorSubject<string>('');
 
   public typeSort: BehaviorSubject<TypeSort> = new BehaviorSubject<TypeSort>(
-    TypeSort.empty
+    TypeSort.empty,
   );
 }

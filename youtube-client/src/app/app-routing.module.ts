@@ -6,13 +6,11 @@ const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
     path: 'login',
-    loadChildren: () =>
-      import('src/app/auth/auth.module').then((m) => m.AuthModule),
+    loadChildren: () => import('src/app/auth/auth.module').then((m) => m.AuthModule),
   },
   {
     path: 'search',
-    loadChildren: () =>
-      import('src/app/youtube/youtube.module').then((m) => m.YoutubeModule),
+    loadChildren: () => import('src/app/youtube/youtube.module').then((m) => m.YoutubeModule),
   },
   { path: '**', component: Page404Component },
 ];

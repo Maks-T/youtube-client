@@ -7,8 +7,6 @@ import { IUser } from '../models/user.model';
 export class AuthService {
   private isLoggedIn: boolean = false;
 
-  constructor() {}
-
   checkLoginData(userData: IUser): boolean {
     this.saveLoginData(userData);
     this.isLoggedIn = true;
