@@ -7,6 +7,7 @@
       type="text"
       placeholder="What are you want to find out?"
       [(ngModel)]="inputSearchText"
+      (keydown.enter)="clickBtnSearch()"
     />
 
     <button class="header-search__btn-search" (click)="clickBtnSearch()">

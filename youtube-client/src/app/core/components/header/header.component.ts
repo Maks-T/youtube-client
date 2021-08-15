@@ -19,9 +19,13 @@ export class HeaderComponent {
   ) {}
 
   clickBtnSearch(): void {
-    this.filterShow = !!this.inputSearchText.trim();
-    this.searchService.searchText.next(this.inputSearchText);
-    this.router.navigate(['search']);
+    if (this.authService.isLogin()) {
+      this.filterShow = !!this.inputSearchText.trim();
+      this.searchService.searchText.next(this.inputSearchText);
+      this.router.navigate(['search']);
+    } else {
+      alert('You are not logged in!');
+    }
   }
 
   toggleFilter(): void {
