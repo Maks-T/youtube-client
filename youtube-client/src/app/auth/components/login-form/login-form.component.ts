@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { IUser } from '../../models/user.model';
+import { AuthService } from '../../sevices/auth.service';
 
 @Component({
   selector: 'app-login-form',
@@ -17,7 +19,7 @@ export class LoginFormComponent implements OnInit {
   public hide = true;
   public form!: FormGroup;
 
-  constructor() {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.form = new FormGroup({ email: this.email, password: this.password });
@@ -40,8 +42,9 @@ export class LoginFormComponent implements OnInit {
   public onSubmit(): void {
     if (this.form.valid) {
       const formData: IUser = this.form.value;
-
-      console.log(formData);
+      if (this.authService.checkLoginData(formData)) {
+        this.router.navigate(['search']);
+      }
     }
   }
 }

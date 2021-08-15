@@ -17,6 +17,6 @@
       (click)="toggleFilter()"
     ></button>
   </div>
-  <div class="login-info">Your Name</div>
+  <div class="login-info">{{ authService.getUserName() }}</div>
 </header>
 <app-search-filter *ngIf="filterShow"></app-search-filter>
