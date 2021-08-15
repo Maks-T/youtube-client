@@ -7,6 +7,7 @@ import { SearchResultsComponent } from './components/search/search-results/searc
 import { ShortTitlePipe } from './pipes/short-title.pipe';
 import { RouterModule } from '@angular/router';
 import { DetailedInfoComponent } from './components/detailed-info/detailed-info.component';
+import { AuthGuard } from '../core/quards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -23,10 +24,12 @@ import { DetailedInfoComponent } from './components/detailed-info/detailed-info.
       {
         path: '',
         component: SearchResultsComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: ':itemId',
         component: DetailedInfoComponent,
+        canActivate: [AuthGuard],
       },
     ]),
   ],
