@@ -90,9 +90,10 @@ header {
 
   margin-left: 100px;
   height: 40px;
-  width: 100px;
 
-  background: url("../../../../assets/icons/login.svg") no-repeat right center;
+  padding-left: 35px;
+
+  background: url("../../../../assets/icons/login.svg") no-repeat left center;
 
   font-family: Roboto;
   font-style: normal;
@@ -102,7 +103,17 @@ header {
 
   color: #4f4f4f;
 }
-@media (max-width: 1000px) {
+
+.login-info__btn-logout {
+  margin-left: 5px;
+  width: 40px;
+  height: 40px;
+  background: url("../../../../assets/icons/logout.png") no-repeat right center;
+  background-size: contain;
+  border: none;
+  outline: none;
+}
+@media (max-width: 1180px) {
   header {
     height: 20vh;
   }

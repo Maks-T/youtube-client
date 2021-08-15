@@ -5,7 +5,7 @@ import { IUser } from '../models/user.model';
   providedIn: 'root',
 })
 export class AuthService {
-  isLoggedIn: boolean = true;
+  private isLoggedIn: boolean = false;
 
   constructor() {}
 
@@ -13,6 +13,13 @@ export class AuthService {
     this.saveLoginData(userData);
     this.isLoggedIn = true;
     return this.isLoggedIn;
+  }
+
+  logOut() {
+    this.isLoggedIn = false;
+    if (this.isLoggedIn) {
+      localStorage.removeItem('dataLogin');
+    }
   }
 
   isLogin() {

@@ -35,7 +35,6 @@ export class SearchItemComponent {
   }
 
   public goToDetailsPage(id: string): void {
-    // console.log('check the details of: ' + id);
     this.router.navigate(['search', id]);
   }
 }

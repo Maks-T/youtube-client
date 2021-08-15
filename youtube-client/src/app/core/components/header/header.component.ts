@@ -29,7 +29,11 @@ export class HeaderComponent {
   }
 
   toggleFilter(): void {
-    console.log('this.filterShow', this.filterShow);
     this.filterShow = !this.filterShow;
+  }
+
+  clickBtnLogout(): void {
+    this.authService.logOut();
+    this.router.navigate(['login']);
   }
 }

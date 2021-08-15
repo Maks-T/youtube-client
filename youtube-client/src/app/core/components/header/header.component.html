@@ -18,6 +18,13 @@
       (click)="toggleFilter()"
     ></button>
   </div>
-  <div class="login-info">{{ authService.getUserName() }}</div>
+  <div class="login-info">
+    {{ authService.getUserName() }}
+    <button
+      class="login-info__btn-logout"
+      (click)="clickBtnLogout()"
+      *ngIf="authService.isLogin()"
+    ></button>
+  </div>
 </header>
 <app-search-filter *ngIf="filterShow"></app-search-filter>
