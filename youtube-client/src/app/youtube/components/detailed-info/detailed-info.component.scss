@@ -7,6 +7,23 @@
   margin-top: 50px;
 }
 
+.detailed-info__btn-back {
+  background-color: blue;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+
+  color: white;
+  font-weight: bold;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:active {
+    transform: translate(1px, 0);
+  }
+}
+
 button {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
@@ -19,10 +36,12 @@ button {
   align-items: stretch;
   flex-direction: row;
   flex-wrap: wrap;
+  border-radius: 5px;
 
   width: 80vw;
   max-height: 70vh;
 
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
   background-color: #e5e5e5;
 }
 
@@ -40,6 +59,10 @@ button {
   max-height: inherit;
   overflow: auto;
   background-image: linear-gradient(to bottom right, #e5e5e5, #cecece);
+  border-bottom: 4px solid blue;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
 }
 
 .detailed-info__title {
@@ -66,7 +89,7 @@ h4 {
 }
 
 p {
-  font-size: x-small;
+  font-size: small;
   font-weight: lighter;
   line-height: 1em;
 }

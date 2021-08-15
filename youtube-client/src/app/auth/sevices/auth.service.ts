@@ -5,7 +5,7 @@ import { IUser } from '../models/user.model';
   providedIn: 'root',
 })
 export class AuthService {
-  isLoggedIn: boolean = false;
+  isLoggedIn: boolean = true;
 
   constructor() {}
 
