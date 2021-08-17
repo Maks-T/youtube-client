@@ -15,14 +15,14 @@ export class AuthService {
     return this.isLoggedIn;
   }
 
-  logOut() {
+  logOut(): void {
     if (this.isLoggedIn) {
       localStorage.removeItem(L_STORAGE_USER_KEY);
     }
     this.isLoggedIn = false;
   }
 
-  isLogin() {
+  get isLogin(): boolean {
     this.isLoggedIn = !!localStorage.getItem(L_STORAGE_USER_KEY);
 
     return this.isLoggedIn;

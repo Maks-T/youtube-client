@@ -8,13 +8,13 @@
       placeholder="What are you want to find out?"
       [(ngModel)]="inputSearchText"
       (keydown.enter)="clickBtnSearch()"
-      [disabled]="!authService.isLogin()"
+      [disabled]="!authService.isLogin"
     />
 
     <button
       class="header-search__btn-search"
       (click)="clickBtnSearch()"
-      [disabled]="!authService.isLogin()"
+      [disabled]="!authService.isLogin"
     >
       search
     </button>
@@ -28,7 +28,7 @@
     <button
       class="login-info__btn-logout"
       (click)="clickBtnLogout()"
-      *ngIf="authService.isLogin()"
+      *ngIf="authService.isLogin"
     ></button>
   </div>
 </header>

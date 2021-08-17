@@ -20,7 +20,7 @@ export class HeaderComponent {
   ) {}
 
   clickBtnSearch(): void {
-    if (this.authService.isLogin()) {
+    if (this.authService.isLogin) {
       this.filterShow = !!this.inputSearchText.trim();
       this.searchService.searchText.next(this.inputSearchText);
       this.router.navigate(['search']);
