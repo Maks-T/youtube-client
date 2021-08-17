@@ -1,0 +1,137 @@
+.detailed-info {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: row;
+
+  margin-top: 50px;
+}
+
+.detailed-info__btn-back {
+  background-color: blue;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+
+  color: white;
+  font-weight: bold;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:active {
+    transform: translate(1px, 0);
+  }
+}
+
+button {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-width: 0;
+}
+
+.detailed-info__container-info {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border-radius: 5px;
+
+  width: 80vw;
+  max-height: 70vh;
+
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  background-color: #e5e5e5;
+}
+
+.detailed-info__image-container {
+  margin-right: auto;
+}
+.detailed-info__image {
+  width: 40vw;
+}
+
+.detailed-info__description-container {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  max-height: inherit;
+  overflow: auto;
+  background-image: linear-gradient(to bottom right, #e5e5e5, #cecece);
+  border-bottom: 4px solid blue;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+}
+
+.detailed-info__title {
+  padding: 10px;
+}
+
+.detailed-info__description {
+  padding: 10px;
+  font-size: medium;
+}
+
+h3 {
+  display: inline;
+  font-weight: bold;
+}
+
+span {
+  font-size: x-small;
+  float: right;
+}
+
+h4 {
+  font-weight: normal;
+}
+
+p {
+  font-size: small;
+  font-weight: lighter;
+  line-height: 1em;
+}
+
+.detailed-info__statistics {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+  margin-top: auto;
+  padding: 10px;
+}
+
+.detailed-info__statistic-panel {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+
+  width: 210px;
+  height: 20px;
+
+  margin-top: 5px;
+
+  .detailed-info__count {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 20px;
+  }
+  .detailed-info__view-count {
+    background: url("../../../../assets/icons/viewCount.svg") left no-repeat;
+  }
+
+  .detailed-info__like-count {
+    background: url("../../../../assets/icons/likeCount.svg") left no-repeat;
+  }
+
+  .detailed-info__dislike-count {
+    background: url("../../../../assets/icons/dislikeCount.svg") left no-repeat;
+  }
+
+  .detailed-info__comment-count {
+    background: url("../../../../assets/icons/commentCount.svg") left no-repeat;
+  }
+}

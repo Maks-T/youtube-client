@@ -1,0 +1,45 @@
+<div class="detailed-info" *ngIf="item">
+  <button class="detailed-info__btn-back" (click)="onGoBack()" [title]="'go back'">&#60;</button>
+
+  <div class="detailed-info__container-info">
+    <div class="detailed-info__image-container">
+      <img
+        class="detailed-info__image"
+        [src]="
+          item.snippet.thumbnails.high.url
+            ? item.snippet.thumbnails.high.url
+            : item.snippet.thumbnails.default.url
+        "
+      />
+    </div>
+
+    <div class="detailed-info__description-container">
+      <div class="detailed-info__title">
+        <p>{{ item.snippet.publishedAt | date }}</p>
+        <h3>{{ item.snippet.title }}</h3>
+      </div>
+      <div class="detailed-info__description">
+        <h4>Description:</h4>
+        <p>
+          {{ item.snippet.description }}
+        </p>
+      </div>
+      <div class="detailed-info__statistics">
+        <div class="detailed-info__statistic-panel">
+          <div class="detailed-info__view-count detailed-info__count">
+            {{ item.statistics.viewCount }}
+          </div>
+          <div class="detailed-info__like-count detailed-info__count">
+            {{ item.statistics.likeCount }}
+          </div>
+          <div class="detailed-info__dislike-count detailed-info__count">
+            {{ item.statistics.dislikeCount }}
+          </div>
+          <div class="detailed-info__comment-count detailed-info__count">
+            {{ item.statistics.commentCount }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

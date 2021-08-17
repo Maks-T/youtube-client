@@ -1,0 +1,35 @@
+<header>
+  <div class="header-search">
+    <div class="header-search__logo"></div>
+
+    <input
+      class="header-search__input-search"
+      type="text"
+      placeholder="What are you want to find out?"
+      [(ngModel)]="inputSearchText"
+      (keydown.enter)="clickBtnSearch()"
+      [disabled]="!authService.isLogin"
+    />
+
+    <button
+      class="header-search__btn-search"
+      (click)="clickBtnSearch()"
+      [disabled]="!authService.isLogin"
+    >
+      search
+    </button>
+    <button
+      class="header-search__btn-setting"
+      (click)="toggleFilter()"
+    ></button>
+  </div>
+  <div class="login-info">
+    {{ authService.getUserName() }}
+    <button
+      class="login-info__btn-logout"
+      (click)="clickBtnLogout()"
+      *ngIf="authService.isLogin"
+    ></button>
+  </div>
+</header>
+<app-search-filter *ngIf="filterShow"></app-search-filter>

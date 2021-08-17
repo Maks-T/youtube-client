@@ -1,4 +1,5 @@
-import { IResponse } from './components/search/search-response.model';
+/* eslint-disable */
+import { IResponse } from './youtube/models/search-response.model';
 
 export const mockResponseNull: IResponse = {
   kind: '',

@@ -1,0 +1,34 @@
+<div class="search-filter__wrapper">
+  <p class="search-filter__caption">Sorting by:</p>
+
+  <a
+    class="search-filter__name"
+    (click)="sortByType(TS.date)"
+    [ngStyle]="{ textDecoration: typeSort === TS.date ? 'none' : 'underline' }"
+  >
+    date</a
+  >
+  <a
+    class="search-filter__name"
+    (click)="sortByType(TS.countViews)"
+    [ngStyle]="{
+      textDecoration: typeSort === TS.countViews ? 'none' : 'underline'
+    }"
+  >
+    count of views</a
+  >
+  <a
+    class="search-filter__name"
+    (click)="sortByType(TS.wordOrSentence)"
+    [ngStyle]="{
+      textDecoration: typeSort === TS.wordOrSentence ? 'none' : 'underline'
+    }"
+  >
+    word or sentence</a
+  >
+  <input
+    class="search-filter__input"
+    [(ngModel)]="inputSearchFilter"
+    (input)="onChangeInput()"
+  />
+</div>

@@ -1,15 +1,1 @@
-<app-header
-  (ToggleFilter)="toggleFilter($event)"
-  (Search)="onSearch($event)"
-></app-header>
-<app-search-filter
-  *ngIf="filterShow"
-  (TSort)="sortByType($event)"
-  (InputText)="getInputText($event)"
-></app-search-filter>
-
-<app-search-results
-  [typeSort]="typeSort"
-  [inputText]="inputText"
-  [searchText]="searchText"
-></app-search-results>
+<app-header></app-header> <router-outlet></router-outlet>
