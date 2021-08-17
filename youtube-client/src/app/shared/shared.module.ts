@@ -7,9 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Page404Component } from './components/page404/page404.component';
 
 @NgModule({
-  declarations: [
-    Page404Component,
-  ],
+  declarations: [Page404Component],
   imports: [
     CommonModule,
     FormsModule,

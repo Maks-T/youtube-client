@@ -16,7 +16,7 @@ export class HeaderComponent {
   constructor(
     public searchService: SearchService,
     private router: Router,
-    public authService: AuthService,
+    public authService: AuthService
   ) {}
 
   clickBtnSearch(): void {
@@ -24,9 +24,6 @@ export class HeaderComponent {
       this.filterShow = !!this.inputSearchText.trim();
       this.searchService.searchText.next(this.inputSearchText);
       this.router.navigate(['search']);
-    } else {
-      /* eslint no-alert: "off" */
-      alert('You are not logged in!');
     }
   }
 
