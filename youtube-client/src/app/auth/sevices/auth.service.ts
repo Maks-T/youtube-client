@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { IUser } from '../models/user.model';
 
+export const L_STORAGE_USER_KEY = 'USER_DATA';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -14,23 +16,26 @@ export class AuthService {
   }
 
   logOut() {
-    this.isLoggedIn = false;
     if (this.isLoggedIn) {
-      localStorage.removeItem('dataLogin');
+      localStorage.removeItem(L_STORAGE_USER_KEY);
     }
+    this.isLoggedIn = false;
   }
 
   isLogin() {
+    this.isLoggedIn = !!localStorage.getItem(L_STORAGE_USER_KEY);
+
     return this.isLoggedIn;
   }
 
   private saveLoginData(userData: IUser): void {
-    localStorage.setItem('dataLogin', JSON.stringify(userData));
+    localStorage.setItem(L_STORAGE_USER_KEY, JSON.stringify(userData));
   }
 
   getUserName(): string {
     if (this.isLoggedIn) {
-      const loginDataStr: string | null = localStorage.getItem('dataLogin');
+      const loginDataStr: string | null =
+        localStorage.getItem(L_STORAGE_USER_KEY);
 
       if (loginDataStr) {
         const loginData: IUser = JSON.parse(loginDataStr);
