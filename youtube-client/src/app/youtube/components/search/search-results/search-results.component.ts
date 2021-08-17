@@ -24,16 +24,16 @@ export class SearchResultsComponent {
   typeSort: string = '';
 
   constructor(public searchService: SearchService) {
-    searchService.searchText.subscribe((searchText) => {
+    searchService.searchText$.subscribe((searchText) => {
       this.searchText = searchText;
       this.onSearch();
     });
 
-    searchService.searchFilterText.subscribe((searchFilterText) => {
+    searchService.searchFilterText$.subscribe((searchFilterText) => {
       this.searchFilterText = searchFilterText;
     });
 
-    searchService.typeSort.subscribe((typeSort) => {
+    searchService.typeSort$.subscribe((typeSort) => {
       this.typeSort = typeSort;
       this.sortByType();
       this.sortByDirection();
@@ -43,27 +43,31 @@ export class SearchResultsComponent {
   sortByDirection(): void {
     if (this.typeSort === TypeSort.dateUp) {
       this.mockResponse.items = this.mockResponse.items.sort(
-        (a: IItem, b: IItem) => Number(new Date(b.snippet.publishedAt))
-          - Number(new Date(a.snippet.publishedAt)),
+        (a: IItem, b: IItem) =>
+          Number(new Date(b.snippet.publishedAt)) -
+          Number(new Date(a.snippet.publishedAt))
       );
     }
 
     if (this.typeSort === TypeSort.dateDown) {
       this.mockResponse.items = this.mockResponse.items.sort(
-        (a: IItem, b: IItem) => Number(new Date(a.snippet.publishedAt))
-          - Number(new Date(b.snippet.publishedAt)),
+        (a: IItem, b: IItem) =>
+          Number(new Date(a.snippet.publishedAt)) -
+          Number(new Date(b.snippet.publishedAt))
       );
     }
 
     if (this.typeSort === TypeSort.countViewsUp) {
       this.mockResponse.items = this.mockResponse.items.sort(
-        (a: IItem, b: IItem) => Number(b.statistics.viewCount) - Number(a.statistics.viewCount),
+        (a: IItem, b: IItem) =>
+          Number(b.statistics.viewCount) - Number(a.statistics.viewCount)
       );
     }
 
     if (this.typeSort === TypeSort.countViewsDown) {
       this.mockResponse.items = this.mockResponse.items.sort(
-        (a: IItem, b: IItem) => Number(a.statistics.viewCount) - Number(b.statistics.viewCount),
+        (a: IItem, b: IItem) =>
+          Number(a.statistics.viewCount) - Number(b.statistics.viewCount)
       );
     }
   }
