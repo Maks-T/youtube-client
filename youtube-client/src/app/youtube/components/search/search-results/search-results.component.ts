@@ -1,3 +1,4 @@
+import { OnDestroy, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { mockResponse, mockResponseNull } from 'src/app/app.constants';
 import { SearchService } from 'src/app/core/services/search.service';
@@ -10,7 +11,7 @@ import { IResponse } from '../../../models/search-response.model';
   templateUrl: './search-results.component.html',
   styleUrls: ['./search-results.component.scss'],
 })
-export class SearchResultsComponent {
+export class SearchResultsComponent implements OnInit, OnDestroy {
   response: IResponse = mockResponseNull;
 
   sortDateUp = false;
@@ -23,21 +24,32 @@ export class SearchResultsComponent {
 
   typeSort: string = '';
 
-  constructor(public searchService: SearchService) {
-    searchService.searchText$.subscribe((searchText) => {
+  constructor(public searchService: SearchService) {}
+
+  ngOnInit() {
+    console.log('onInit SearchComponent');
+
+    this.searchService.searchText$.subscribe((searchText) => {
       this.searchText = searchText;
       this.onSearch();
     });
 
-    searchService.searchFilterText$.subscribe((searchFilterText) => {
+    this.searchService.searchFilterText$.subscribe((searchFilterText) => {
       this.searchFilterText = searchFilterText;
     });
 
-    searchService.typeSort$.subscribe((typeSort) => {
+    this.searchService.typeSort$.subscribe((typeSort) => {
       this.typeSort = typeSort;
       this.sortByType();
       this.sortByDirection();
     });
+  }
+
+  ngOnDestroy() {
+    console.log('onDestroy SearchComponent');
+    /*this.searchService.searchText$.unsubscribe();
+    this.searchService.searchFilterText$.unsubscribe();
+    this.searchService.typeSort$.unsubscribe();*/
   }
 
   sortByDirection(): void {
@@ -91,15 +103,13 @@ export class SearchResultsComponent {
   }
 
   onSearch(): void {
+    console.log('onSearch');
     if (this.searchText) {
       const searchResult$ = this.searchService.fetchVideos(this.searchText);
 
       searchResult$.subscribe((res) => {
         this.response = res;
-        console.log(res);
       });
-
-      //this.response = JSON.parse(JSON.stringify(mockResponse));
     } else {
       this.response = JSON.parse(JSON.stringify(mockResponseNull));
     }

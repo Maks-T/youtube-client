@@ -34,9 +34,14 @@ export class SearchService {
       }),
       switchMap((videoIds) => {
         const urlVideos = `videos?id=${videoIds}&part=statistics,snippet`;
-        console.log('videoIds', videoIds);
         return this.http.get<IResponse>(urlVideos);
       })
     );
+  }
+
+  public fetchDetailedInfo(videoId: string) {
+    const url = `videos?id=${videoId}&part=snippet,statistics`;
+
+    return this.http.get<IResponse>(url);
   }
 }
