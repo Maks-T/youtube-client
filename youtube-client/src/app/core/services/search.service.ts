@@ -22,7 +22,7 @@ export class SearchService {
   constructor(public http: HttpClient) {}
 
   public fetchVideos(searchValue: string) {
-    const url = `https://www.googleapis.com/youtube/v3/search?q=${searchValue}&part=snippet&type=video&maxResults=10&key=AIzaSyDIPGYrE4uua9sq4mwmjZZD6SrjU0y1WjA`;
+    const url = `search?q=${searchValue}&part=snippet&type=video&maxResults=10`;
 
     return this.http.get<IResponse>(url).pipe(
       map((responseData: IResponse) => {
@@ -33,7 +33,7 @@ export class SearchService {
         return videoIds;
       }),
       switchMap((videoIds) => {
-        const urlVideos = `https://www.googleapis.com/youtube/v3/videos?id=${videoIds}&key=AIzaSyDIPGYrE4uua9sq4mwmjZZD6SrjU0y1WjA&part=statistics,snippet`;
+        const urlVideos = `videos?id=${videoIds}&part=statistics,snippet`;
         console.log('videoIds', videoIds);
         return this.http.get<IResponse>(urlVideos);
       })
