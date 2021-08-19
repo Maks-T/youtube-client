@@ -9,6 +9,8 @@ import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { YoutubeModule } from './youtube/youtube.module';
 
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -18,6 +20,7 @@ import { YoutubeModule } from './youtube/youtube.module';
     SharedModule,
     CoreModule,
     YoutubeModule,
+    HttpClientModule,
   ],
   exports: [SharedModule, CoreModule, YoutubeModule],
   providers: [],

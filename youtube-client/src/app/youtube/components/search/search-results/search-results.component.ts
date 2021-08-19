@@ -11,7 +11,7 @@ import { IResponse } from '../../../models/search-response.model';
   styleUrls: ['./search-results.component.scss'],
 })
 export class SearchResultsComponent {
-  mockResponse: IResponse = mockResponseNull;
+  response: IResponse = mockResponseNull;
 
   sortDateUp = false;
 
@@ -42,7 +42,7 @@ export class SearchResultsComponent {
 
   sortByDirection(): void {
     if (this.typeSort === TypeSort.dateUp) {
-      this.mockResponse.items = this.mockResponse.items.sort(
+      this.response.items = this.response.items.sort(
         (a: IItem, b: IItem) =>
           Number(new Date(b.snippet.publishedAt)) -
           Number(new Date(a.snippet.publishedAt))
@@ -50,7 +50,7 @@ export class SearchResultsComponent {
     }
 
     if (this.typeSort === TypeSort.dateDown) {
-      this.mockResponse.items = this.mockResponse.items.sort(
+      this.response.items = this.response.items.sort(
         (a: IItem, b: IItem) =>
           Number(new Date(a.snippet.publishedAt)) -
           Number(new Date(b.snippet.publishedAt))
@@ -58,14 +58,14 @@ export class SearchResultsComponent {
     }
 
     if (this.typeSort === TypeSort.countViewsUp) {
-      this.mockResponse.items = this.mockResponse.items.sort(
+      this.response.items = this.response.items.sort(
         (a: IItem, b: IItem) =>
           Number(b.statistics.viewCount) - Number(a.statistics.viewCount)
       );
     }
 
     if (this.typeSort === TypeSort.countViewsDown) {
-      this.mockResponse.items = this.mockResponse.items.sort(
+      this.response.items = this.response.items.sort(
         (a: IItem, b: IItem) =>
           Number(a.statistics.viewCount) - Number(b.statistics.viewCount)
       );
@@ -92,9 +92,16 @@ export class SearchResultsComponent {
 
   onSearch(): void {
     if (this.searchText) {
-      this.mockResponse = JSON.parse(JSON.stringify(mockResponse));
+      const searchResult$ = this.searchService.fetchVideos(this.searchText);
+
+      searchResult$.subscribe((res) => {
+        this.response = res;
+        console.log(res);
+      });
+
+      //this.response = JSON.parse(JSON.stringify(mockResponse));
     } else {
-      this.mockResponse = JSON.parse(JSON.stringify(mockResponseNull));
+      this.response = JSON.parse(JSON.stringify(mockResponseNull));
     }
   }
 }
