@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { fromEvent } from 'rxjs';
+import { debounceTime, filter, map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/sevices/auth.service';
 import { SearchService } from '../../services/search.service';
 
@@ -8,16 +10,32 @@ import { SearchService } from '../../services/search.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   filterShow: boolean = false;
 
   inputSearchText: string = '';
+
+  @ViewChild('searchInput', { static: true }) searchInput!: ElementRef;
 
   constructor(
     public searchService: SearchService,
     private router: Router,
     public authService: AuthService
   ) {}
+
+  ngOnInit() {
+    fromEvent(this.searchInput.nativeElement, 'keyup')
+      .pipe(
+        map((event: any) => {
+          return event.target.value;
+        }),
+        filter((res) => res.length > 2),
+        debounceTime(1000)
+      )
+      .subscribe((text: string) => {
+        this.searchService.searchText$.next(text);
+      });
+  }
 
   clickBtnSearch(): void {
     if (this.authService.isLogin) {

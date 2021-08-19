@@ -9,6 +9,7 @@
       [(ngModel)]="inputSearchText"
       (keydown.enter)="clickBtnSearch()"
       [disabled]="!authService.isLogin"
+      #searchInput
     />
 
     <button

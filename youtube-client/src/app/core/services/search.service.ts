@@ -3,8 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { TypeSort } from 'src/app/shared/models/type-sort.model';
 import { IResponse } from 'src/app/youtube/models/search-response.model';
 import { HttpClient } from '@angular/common/http';
-import { map, switchMap } from 'rxjs/operators';
-import { IItem } from 'src/app/youtube/models/search-item.model';
+import { map, switchMap, debounceTime } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
