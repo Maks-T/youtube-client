@@ -1,4 +1,8 @@
-<div class=".search-results__wrapper" *ngIf="response.items.length">
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<div
+  class=".search-results__wrapper"
+  *ngIf="response.items.length && !isLoading"
+>
   <app-search-item
     *ngFor="let item of response.items | filter: typeSort:searchFilterText"
     [item]="item"

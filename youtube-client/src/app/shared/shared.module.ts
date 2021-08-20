@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Page404Component } from './components/page404/page404.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { YoutubeInterceptor } from '../youtube/sevices/youtube.interceptor';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [Page404Component],
@@ -17,6 +18,7 @@ import { YoutubeInterceptor } from '../youtube/sevices/youtube.interceptor';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
     FormsModule,
@@ -24,6 +26,7 @@ import { YoutubeInterceptor } from '../youtube/sevices/youtube.interceptor';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: YoutubeInterceptor, multi: true },

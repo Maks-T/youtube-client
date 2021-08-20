@@ -1,6 +1,6 @@
 import { OnDestroy, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
-import { mockResponse, mockResponseNull } from 'src/app/app.constants';
+import { mockResponseNull } from 'src/app/app.constants';
 import { SearchService } from 'src/app/core/services/search.service';
 import { TypeSort } from '../../../../shared/models/type-sort.model';
 import { IItem } from '../../../models/search-item.model';
@@ -17,6 +17,8 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   sortDateUp = false;
 
   sortCountViewsUp = false;
+
+  isLoading = false;
 
   searchText: string = '';
 
@@ -43,11 +45,16 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       this.sortByType();
       this.sortByDirection();
     });
+
+    this.searchService.isLoading$.subscribe((isLoading) => {
+      this.isLoading = isLoading;
+    });
   }
 
   ngOnDestroy() {
     console.log('onDestroy SearchComponent');
-    /*this.searchService.searchText$.unsubscribe();
+    /*
+    this.searchService.searchText$.unsubscribe();
     this.searchService.searchFilterText$.unsubscribe();
     this.searchService.typeSort$.unsubscribe();*/
   }

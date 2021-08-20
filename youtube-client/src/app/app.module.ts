@@ -22,7 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
     YoutubeModule,
     HttpClientModule,
   ],
-  exports: [SharedModule, CoreModule, YoutubeModule],
+  exports: [SharedModule, CoreModule],
   providers: [],
   bootstrap: [AppComponent],
 })
