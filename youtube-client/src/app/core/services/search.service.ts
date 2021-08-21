@@ -9,7 +9,9 @@ import { map, switchMap, debounceTime, finalize } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class SearchService {
-  public searchText$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  public searchText$: BehaviorSubject<string> = new BehaviorSubject<string>(
+    'Welcome!'
+  );
 
   public searchFilterText$: BehaviorSubject<string> =
     new BehaviorSubject<string>('');

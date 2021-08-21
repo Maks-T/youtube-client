@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IUser } from '../models/user.model';
+import { IUser } from '../../auth/models/user.model';
 
 export const L_STORAGE_USER_KEY = 'USER_DATA';
 

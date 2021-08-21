@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { fromEvent } from 'rxjs';
 import { debounceTime, filter, map } from 'rxjs/operators';
-import { AuthService } from 'src/app/auth/sevices/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { SearchService } from '../../services/search.service';
 
 @Component({
@@ -32,9 +32,14 @@ export class HeaderComponent implements OnInit {
         filter((res) => res.length > 2),
         debounceTime(1000)
       )
-      .subscribe((text: string) => {
-        this.searchService.searchText$.next(text);
+      .subscribe((searchText: string) => {
+        this.searchService.searchText$.next(searchText);
       });
+
+    this.searchService.searchText$.subscribe((searchText) => {
+      console.log('searchText', searchText);
+      this.inputSearchText = searchText;
+    });
   }
 
   clickBtnSearch(): void {
