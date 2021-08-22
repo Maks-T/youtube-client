@@ -1,4 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  Component, ElementRef, OnInit, ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { fromEvent } from 'rxjs';
 import { debounceTime, filter, map } from 'rxjs/operators';
@@ -20,24 +22,21 @@ export class HeaderComponent implements OnInit {
   constructor(
     public searchService: SearchService,
     private router: Router,
-    public authService: AuthService
+    public authService: AuthService,
   ) {}
 
   ngOnInit() {
     fromEvent(this.searchInput.nativeElement, 'keyup')
       .pipe(
-        map((event: any) => {
-          return event.target.value;
-        }),
+        map((event: any) => event.target.value),
         filter((res) => res.length > 2),
-        debounceTime(1000)
+        debounceTime(1000),
       )
       .subscribe((searchText: string) => {
         this.searchService.searchText$.next(searchText);
       });
 
     this.searchService.searchText$.subscribe((searchText) => {
-      console.log('searchText', searchText);
       this.inputSearchText = searchText;
     });
   }

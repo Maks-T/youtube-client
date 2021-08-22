@@ -1,7 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { mockResponse } from 'src/app/app.constants';
 import { SearchService } from 'src/app/core/services/search.service';
 import { IItem } from '../../models/search-item.model';
 import { IResponse } from '../../models/search-response.model';
@@ -11,7 +10,7 @@ import { IResponse } from '../../models/search-response.model';
   templateUrl: './detailed-info.component.html',
   styleUrls: ['./detailed-info.component.scss'],
 })
-export class DetailedInfoComponent implements OnInit, OnDestroy {
+export class DetailedInfoComponent implements OnInit {
   item!: IItem;
 
   itemId!: string;
@@ -21,7 +20,7 @@ export class DetailedInfoComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    public searchService: SearchService
+    public searchService: SearchService,
   ) {}
 
   ngOnInit(): void {
@@ -29,15 +28,8 @@ export class DetailedInfoComponent implements OnInit, OnDestroy {
     this.response$ = this.searchService.fetchDetailedInfo(this.itemId);
 
     this.response$.subscribe((responseData) => {
-      this.item = responseData.items[0];
+      [this.item] = responseData.items;
     });
-
-    /*mockResponse.items.find((item) => item.id === this.itemId)
-      || mockResponse.items[0];*/
-  }
-
-  ngOnDestroy() {
-    this.response$;
   }
 
   public onGoBack() {

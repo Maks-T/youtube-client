@@ -34,8 +34,7 @@ export class AuthService {
 
   getUserName(): string {
     if (this.isLoggedIn) {
-      const loginDataStr: string | null =
-        localStorage.getItem(L_STORAGE_USER_KEY);
+      const loginDataStr: string | null = localStorage.getItem(L_STORAGE_USER_KEY);
 
       if (loginDataStr) {
         const loginData: IUser = JSON.parse(loginDataStr);
