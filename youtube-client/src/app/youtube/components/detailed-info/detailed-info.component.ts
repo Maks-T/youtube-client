@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { SearchService } from 'src/app/core/services/search.service';
 import { IItem } from '../../models/search-item.model';
 import { IResponse } from '../../models/search-response.model';
@@ -10,26 +11,34 @@ import { IResponse } from '../../models/search-response.model';
   templateUrl: './detailed-info.component.html',
   styleUrls: ['./detailed-info.component.scss'],
 })
-export class DetailedInfoComponent implements OnInit {
+export class DetailedInfoComponent implements OnInit, OnDestroy {
   item!: IItem;
 
   itemId!: string;
 
   response$!: Observable<IResponse>;
 
+  destroyed$ = new Subject<boolean>();
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    public searchService: SearchService,
+    public searchService: SearchService
   ) {}
 
   ngOnInit(): void {
     this.itemId = this.route.snapshot.paramMap.get('itemId') as string;
-    this.response$ = this.searchService.fetchDetailedInfo(this.itemId);
+    this.searchService
+      .fetchDetailedInfo(this.itemId)
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((responseData) => {
+        [this.item] = responseData.items;
+      });
+  }
 
-    this.response$.subscribe((responseData) => {
-      [this.item] = responseData.items;
-    });
+  ngOnDestroy(): void {
+    this.destroyed$.next();
+    this.destroyed$.complete();
   }
 
   public onGoBack() {

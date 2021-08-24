@@ -1,4 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { mockResponseNull } from 'src/app/app.constants';
 import { SearchService } from 'src/app/core/services/search.service';
 
@@ -26,61 +28,72 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
   typeSort: string = '';
 
+  destroyed$ = new Subject<boolean>();
+
   constructor(public searchService: SearchService) {}
 
   ngOnInit() {
-    this.searchService.searchText$.subscribe((searchText) => {
-      this.searchText = searchText;
-      this.onSearch();
-    });
+    this.searchService.searchText$
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((searchText) => {
+        this.searchText = searchText;
+        this.onSearch();
+      });
 
-    this.searchService.searchFilterText$.subscribe((searchFilterText) => {
-      this.searchFilterText = searchFilterText;
-    });
+    this.searchService.searchFilterText$
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((searchFilterText) => {
+        this.searchFilterText = searchFilterText;
+      });
 
-    this.searchService.typeSort$.subscribe((typeSort) => {
-      this.typeSort = typeSort;
-      this.sortByType();
-      this.sortByDirection();
-    });
+    this.searchService.typeSort$
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((typeSort) => {
+        this.typeSort = typeSort;
+        this.sortByType();
+        this.sortByDirection();
+      });
 
-    this.searchService.isLoading$.subscribe((isLoading) => {
-      this.isLoading = isLoading;
-    });
+    this.searchService.isLoading$
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((isLoading) => {
+        this.isLoading = isLoading;
+      });
   }
 
   ngOnDestroy() {
-    /*
-    this.searchService.searchText$.unsubscribe();
-    this.searchService.searchFilterText$.unsubscribe();
-    this.searchService.typeSort$.unsubscribe();
-    */
+    this.destroyed$.next();
+    this.destroyed$.complete();
   }
 
   sortByDirection(): void {
     if (this.typeSort === TypeSort.dateUp) {
       this.response.items = this.response.items.sort(
-        (a: IItem, b: IItem) => Number(new Date(b.snippet.publishedAt))
-          - Number(new Date(a.snippet.publishedAt)),
+        (a: IItem, b: IItem) =>
+          Number(new Date(b.snippet.publishedAt)) -
+          Number(new Date(a.snippet.publishedAt))
       );
     }
 
     if (this.typeSort === TypeSort.dateDown) {
       this.response.items = this.response.items.sort(
-        (a: IItem, b: IItem) => Number(new Date(a.snippet.publishedAt))
-          - Number(new Date(b.snippet.publishedAt)),
+        (a: IItem, b: IItem) =>
+          Number(new Date(a.snippet.publishedAt)) -
+          Number(new Date(b.snippet.publishedAt))
       );
     }
 
     if (this.typeSort === TypeSort.countViewsUp) {
       this.response.items = this.response.items.sort(
-        (a: IItem, b: IItem) => Number(b.statistics.viewCount) - Number(a.statistics.viewCount),
+        (a: IItem, b: IItem) =>
+          Number(b.statistics.viewCount) - Number(a.statistics.viewCount)
       );
     }
 
     if (this.typeSort === TypeSort.countViewsDown) {
       this.response.items = this.response.items.sort(
-        (a: IItem, b: IItem) => Number(a.statistics.viewCount) - Number(b.statistics.viewCount),
+        (a: IItem, b: IItem) =>
+          Number(a.statistics.viewCount) - Number(b.statistics.viewCount)
       );
     }
   }

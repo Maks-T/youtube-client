@@ -1,9 +1,13 @@
 import {
-  Component, ElementRef, OnInit, ViewChild,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { fromEvent } from 'rxjs';
-import { debounceTime, filter, map } from 'rxjs/operators';
+import { fromEvent, Subject } from 'rxjs';
+import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 import { SearchService } from '../../services/search.service';
 
@@ -12,17 +16,19 @@ import { SearchService } from '../../services/search.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   filterShow: boolean = false;
 
   inputSearchText: string = '';
+
+  destroyed$ = new Subject<boolean>();
 
   @ViewChild('searchInput', { static: true }) searchInput!: ElementRef;
 
   constructor(
     public searchService: SearchService,
     private router: Router,
-    public authService: AuthService,
+    public authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -31,14 +37,22 @@ export class HeaderComponent implements OnInit {
         map((event: any) => event.target.value),
         filter((res) => res.length > 2),
         debounceTime(1000),
+        takeUntil(this.destroyed$)
       )
       .subscribe((searchText: string) => {
         this.searchService.searchText$.next(searchText);
       });
 
-    this.searchService.searchText$.subscribe((searchText) => {
-      this.inputSearchText = searchText;
-    });
+    this.searchService.searchText$
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((searchText) => {
+        this.inputSearchText = searchText;
+      });
+  }
+
+  ngOnDestroy() {
+    this.destroyed$.next();
+    this.destroyed$.complete();
   }
 
   clickBtnSearch(): void {
