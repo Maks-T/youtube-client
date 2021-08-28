@@ -22,7 +22,7 @@ import { IResponse } from '../../../models/search-response.model';
 export class SearchResultsComponent implements OnInit, OnDestroy {
   response: IResponse = mockResponseNull;
 
-  items$!: Observable<(IItem | ICustomItem)[]>;
+  items$?: Observable<(IItem | ICustomItem)[]>;
 
   sortDateUp = false;
 

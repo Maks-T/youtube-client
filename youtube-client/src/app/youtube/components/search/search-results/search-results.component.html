@@ -2,7 +2,10 @@
 <button mat-raised-button (click)="onAddCustomCard()">Add custom card</button>
 >
 <div class=".search-results__wrapper" *ngIf="!isLoading">
-  <app-search-item *ngFor="let item of items$ | async" [item]="item">
+  <app-search-item
+    *ngFor="let item of items$ | async | filter: typeSort:searchFilterText"
+    [item]="item"
+  >
   </app-search-item>
 </div>
 <!--| filter: typeSort:searchFilterText-->
