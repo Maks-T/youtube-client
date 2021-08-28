@@ -9,6 +9,7 @@ import { ShortTitlePipe } from './pipes/short-title.pipe';
 import { DetailedInfoComponent } from './components/detailed-info/detailed-info.component';
 import { AuthGuard } from '../core/quards/auth.guard';
 import { SharedModule } from '../shared/shared.module';
+import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { SharedModule } from '../shared/shared.module';
     BottomColorDirective,
     FilterPipe,
     DetailedInfoComponent,
+    AdminComponent,
   ],
   imports: [
     CommonModule,
@@ -26,6 +28,11 @@ import { SharedModule } from '../shared/shared.module';
       {
         path: '',
         component: SearchResultsComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'admin',
+        component: AdminComponent,
         canActivate: [AuthGuard],
       },
       {
@@ -38,6 +45,7 @@ import { SharedModule } from '../shared/shared.module';
   exports: [
     SearchResultsComponent,
     SearchItemComponent,
+    AdminComponent,
     ShortTitlePipe,
     BottomColorDirective,
     FilterPipe,

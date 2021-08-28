@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { mockResponseNull } from 'src/app/app.constants';
@@ -30,7 +31,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
   destroyed$ = new Subject<boolean>();
 
-  constructor(public searchService: SearchService) {}
+  constructor(public searchService: SearchService, private router: Router) {}
 
   ngOnInit() {
     this.searchService.searchText$
@@ -126,5 +127,9 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     } else {
       this.response = JSON.parse(JSON.stringify(mockResponseNull));
     }
+  }
+
+  onAddCustomCard(): void {
+    this.router.navigate(['search', 'admin']);
   }
 }
