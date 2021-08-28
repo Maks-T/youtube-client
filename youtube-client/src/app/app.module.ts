@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { YoutubeModule } from './youtube/youtube.module';
+import { reducers } from './redux';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +22,7 @@ import { YoutubeModule } from './youtube/youtube.module';
     CoreModule,
     YoutubeModule,
     HttpClientModule,
+    [StoreModule.forRoot(reducers)],
   ],
   exports: [SharedModule, CoreModule],
   providers: [],

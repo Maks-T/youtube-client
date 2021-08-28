@@ -1,9 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { mockResponseNull } from 'src/app/app.constants';
 import { SearchService } from 'src/app/core/services/search.service';
+import { IAppState } from 'src/app/redux';
+import { SetYoutubeItems } from 'src/app/redux/actions/youtube.action';
+import { ICustomItem } from 'src/app/redux/models/custom-item.model';
+import { getAllItems } from 'src/app/redux/selectors/items.selector';
 
 import { TypeSort } from '../../../../shared/models/type-sort.model';
 import { IItem } from '../../../models/search-item.model';
@@ -16,6 +21,8 @@ import { IResponse } from '../../../models/search-response.model';
 })
 export class SearchResultsComponent implements OnInit, OnDestroy {
   response: IResponse = mockResponseNull;
+
+  items$!: Observable<(IItem | ICustomItem)[]>;
 
   sortDateUp = false;
 
@@ -31,9 +38,19 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
   destroyed$ = new Subject<boolean>();
 
-  constructor(public searchService: SearchService, private router: Router) {}
+  constructor(
+    public searchService: SearchService,
+    private router: Router,
+    private store: Store<IAppState>
+  ) {}
 
   ngOnInit() {
+    this.items$ = this.store.select(getAllItems);
+
+    this.items$.subscribe((res) => {
+      console.log('STATE RES', res);
+    });
+
     this.searchService.searchText$
       .pipe(takeUntil(this.destroyed$))
       .subscribe((searchText) => {
@@ -122,7 +139,8 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       const searchResult$ = this.searchService.fetchVideos(this.searchText);
 
       searchResult$.subscribe((res) => {
-        this.response = res;
+        this.store.dispatch(new SetYoutubeItems(res.items));
+        //this.response = res;
       });
     } else {
       this.response = JSON.parse(JSON.stringify(mockResponseNull));
