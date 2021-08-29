@@ -1,6 +1,7 @@
 <mat-spinner *ngIf="isLoading"></mat-spinner>
-<button mat-raised-button (click)="onAddCustomCard()">Add custom card</button>
->
+<button mat-raised-button color="primary" (click)="onAddCustomCard()">
+  Add custom card
+</button>
 <div class=".search-results__wrapper" *ngIf="!isLoading">
   <app-search-item
     *ngFor="let item of items$ | async | filter: typeSort:searchFilterText"
@@ -8,4 +9,3 @@
   >
   </app-search-item>
 </div>
-<!--| filter: typeSort:searchFilterText-->

@@ -1,5 +1,5 @@
 import { IItem } from 'src/app/youtube/models/search-item.model';
-import { YoutubeActions, YoutubeItemsUnion } from '../actions/youtube.action';
+import { SetYoutubeItems, YoutubeActions } from '../actions/youtube.action';
 
 export interface IYoutubeItemsState {
   items: IItem[];
@@ -11,11 +11,10 @@ const initialState: IYoutubeItemsState = {
 
 export function YoutubeItemsReducer(
   state: IYoutubeItemsState = initialState,
-  action: YoutubeItemsUnion
+  action: SetYoutubeItems,
 ) {
   switch (action.type) {
     case YoutubeActions.SetYoutubeItems:
-      console.log(state);
       return {
         ...state,
         items: action.payload,

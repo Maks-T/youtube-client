@@ -13,5 +13,5 @@ export const getAllItems = createSelector(
   (stateCustom: ICustomItemsState, stateYoutube: IYoutubeItemsState) => [
     ...stateCustom.items,
     ...stateYoutube.items,
-  ]
+  ],
 );

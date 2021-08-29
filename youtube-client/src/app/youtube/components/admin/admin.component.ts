@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { IAppState } from 'src/app/redux';
 import { CreateCustomItem } from 'src/app/redux/actions/cutom.action';
-import { ICustomItem } from 'src/app/redux/models/custom-item.model';
+import { v4 as uuidv4 } from 'uuid';
+import { ICustomItem } from '../../models/custom-item.model';
 
 @Component({
   selector: 'app-admin',
@@ -17,7 +18,7 @@ export class AdminComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    public store: Store<IAppState>
+    public store: Store<IAppState>,
   ) {}
 
   ngOnInit(): void {
@@ -30,8 +31,8 @@ export class AdminComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    let payload: ICustomItem = {
-      id: 'noid',
+    const payload: ICustomItem = {
+      id: uuidv4(),
       snippet: {
         title: this.cardForm.controls.title.value,
         description: this.cardForm.controls.description.value,

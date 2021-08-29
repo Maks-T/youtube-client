@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { ICustomItem } from 'src/app/redux/models/custom-item.model';
+import { ICustomItem } from 'src/app/youtube/models/custom-item.model';
 import { IItem } from 'src/app/youtube/models/search-item.model';
 
 const countMillisecondInDay = 86400000;
@@ -19,8 +19,7 @@ export class SearchItemComponent {
   constructor(private router: Router) {}
 
   getColor(): string {
-    const timeDifference: number =
-      Number(new Date()) - Number(new Date(this.item.snippet.publishedAt));
+    const timeDifference: number = Number(new Date()) - Number(new Date(this.item.snippet.publishedAt));
 
     const dayDifference = timeDifference / countMillisecondInDay;
 

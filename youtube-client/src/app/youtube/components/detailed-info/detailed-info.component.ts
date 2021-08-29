@@ -1,8 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { select, Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { SearchService } from 'src/app/core/services/search.service';
+import { IAppState } from 'src/app/redux';
+import { getAllItems } from 'src/app/redux/selectors/items.selector';
+import { ICustomItem } from '../../models/custom-item.model';
 import { IItem } from '../../models/search-item.model';
 import { IResponse } from '../../models/search-response.model';
 
@@ -12,7 +16,7 @@ import { IResponse } from '../../models/search-response.model';
   styleUrls: ['./detailed-info.component.scss'],
 })
 export class DetailedInfoComponent implements OnInit, OnDestroy {
-  item!: IItem;
+  item?: (IItem | ICustomItem) | undefined;
 
   itemId!: string;
 
@@ -23,16 +27,17 @@ export class DetailedInfoComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    public searchService: SearchService
+    public searchService: SearchService,
+    private store: Store<IAppState>,
   ) {}
 
   ngOnInit(): void {
     this.itemId = this.route.snapshot.paramMap.get('itemId') as string;
-    this.searchService
-      .fetchDetailedInfo(this.itemId)
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe((responseData) => {
-        [this.item] = responseData.items;
+
+    this.store
+      .pipe(takeUntil(this.destroyed$), select(getAllItems))
+      .subscribe((items) => {
+        this.item = items.find((item) => item.id === this.itemId);
       });
   }
 

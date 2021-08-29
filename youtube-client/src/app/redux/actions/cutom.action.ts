@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { ICustomItem } from '../models/custom-item.model';
+import { ICustomItem } from 'src/app/youtube/models/custom-item.model';
 
 export enum CustomActions {
   CreateCustomItem = '[Custom Items] CreateCustomItem',
