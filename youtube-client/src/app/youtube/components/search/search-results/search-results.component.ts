@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
-import { mockResponse, mockResponseNull } from 'src/app/app.constants';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { mockResponseNull } from 'src/app/app.constants';
 import { SearchService } from 'src/app/core/services/search.service';
+
 import { TypeSort } from '../../../../shared/models/type-sort.model';
 import { IItem } from '../../../models/search-item.model';
 import { IResponse } from '../../../models/search-response.model';
@@ -10,12 +14,14 @@ import { IResponse } from '../../../models/search-response.model';
   templateUrl: './search-results.component.html',
   styleUrls: ['./search-results.component.scss'],
 })
-export class SearchResultsComponent {
-  mockResponse: IResponse = mockResponseNull;
+export class SearchResultsComponent implements OnInit, OnDestroy {
+  response: IResponse = mockResponseNull;
 
   sortDateUp = false;
 
   sortCountViewsUp = false;
+
+  isLoading = false;
 
   searchText: string = '';
 
@@ -23,26 +29,47 @@ export class SearchResultsComponent {
 
   typeSort: string = '';
 
-  constructor(public searchService: SearchService) {
-    searchService.searchText$.subscribe((searchText) => {
-      this.searchText = searchText;
-      this.onSearch();
-    });
+  destroyed$ = new Subject<boolean>();
 
-    searchService.searchFilterText$.subscribe((searchFilterText) => {
-      this.searchFilterText = searchFilterText;
-    });
+  constructor(public searchService: SearchService, private router: Router) {}
 
-    searchService.typeSort$.subscribe((typeSort) => {
-      this.typeSort = typeSort;
-      this.sortByType();
-      this.sortByDirection();
-    });
+  ngOnInit() {
+    this.searchService.searchText$
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((searchText) => {
+        this.searchText = searchText;
+        this.onSearch();
+      });
+
+    this.searchService.searchFilterText$
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((searchFilterText) => {
+        this.searchFilterText = searchFilterText;
+      });
+
+    this.searchService.typeSort$
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((typeSort) => {
+        this.typeSort = typeSort;
+        this.sortByType();
+        this.sortByDirection();
+      });
+
+    this.searchService.isLoading$
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((isLoading) => {
+        this.isLoading = isLoading;
+      });
+  }
+
+  ngOnDestroy() {
+    this.destroyed$.next();
+    this.destroyed$.complete();
   }
 
   sortByDirection(): void {
     if (this.typeSort === TypeSort.dateUp) {
-      this.mockResponse.items = this.mockResponse.items.sort(
+      this.response.items = this.response.items.sort(
         (a: IItem, b: IItem) =>
           Number(new Date(b.snippet.publishedAt)) -
           Number(new Date(a.snippet.publishedAt))
@@ -50,7 +77,7 @@ export class SearchResultsComponent {
     }
 
     if (this.typeSort === TypeSort.dateDown) {
-      this.mockResponse.items = this.mockResponse.items.sort(
+      this.response.items = this.response.items.sort(
         (a: IItem, b: IItem) =>
           Number(new Date(a.snippet.publishedAt)) -
           Number(new Date(b.snippet.publishedAt))
@@ -58,14 +85,14 @@ export class SearchResultsComponent {
     }
 
     if (this.typeSort === TypeSort.countViewsUp) {
-      this.mockResponse.items = this.mockResponse.items.sort(
+      this.response.items = this.response.items.sort(
         (a: IItem, b: IItem) =>
           Number(b.statistics.viewCount) - Number(a.statistics.viewCount)
       );
     }
 
     if (this.typeSort === TypeSort.countViewsDown) {
-      this.mockResponse.items = this.mockResponse.items.sort(
+      this.response.items = this.response.items.sort(
         (a: IItem, b: IItem) =>
           Number(a.statistics.viewCount) - Number(b.statistics.viewCount)
       );
@@ -92,9 +119,17 @@ export class SearchResultsComponent {
 
   onSearch(): void {
     if (this.searchText) {
-      this.mockResponse = JSON.parse(JSON.stringify(mockResponse));
+      const searchResult$ = this.searchService.fetchVideos(this.searchText);
+
+      searchResult$.subscribe((res) => {
+        this.response = res;
+      });
     } else {
-      this.mockResponse = JSON.parse(JSON.stringify(mockResponseNull));
+      this.response = JSON.parse(JSON.stringify(mockResponseNull));
     }
+  }
+
+  onAddCustomCard(): void {
+    this.router.navigate(['search', 'admin']);
   }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IUser } from '../../models/user.model';
-import { AuthService } from '../../sevices/auth.service';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-login-form',
@@ -25,6 +25,9 @@ export class LoginFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({ email: this.email, password: this.password });
+    if (this.authService.isLogin) {
+      this.router.navigate(['search']);
+    }
   }
 
   public getEmailErrorMessage(): string {

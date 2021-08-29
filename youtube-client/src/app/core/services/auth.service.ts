@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IUser } from '../models/user.model';
+import { IUser } from '../../auth/models/user.model';
 
 export const L_STORAGE_USER_KEY = 'USER_DATA';
 
@@ -34,8 +34,7 @@ export class AuthService {
 
   getUserName(): string {
     if (this.isLoggedIn) {
-      const loginDataStr: string | null =
-        localStorage.getItem(L_STORAGE_USER_KEY);
+      const loginDataStr: string | null = localStorage.getItem(L_STORAGE_USER_KEY);
 
       if (loginDataStr) {
         const loginData: IUser = JSON.parse(loginDataStr);

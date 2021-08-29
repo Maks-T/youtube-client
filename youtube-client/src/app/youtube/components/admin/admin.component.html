@@ -1,0 +1,17 @@
+<form [formGroup]="cardForm">
+  <mat-form-field>
+    <input matInput placeholder="Title" formControlName="title" />
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Description" formControlName="description" />
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Image Link" formControlName="imageLink" />
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Video Link" formControlName="videoLink" />
+  </mat-form-field>
+  <button mat-raised-button [disabled]="cardForm.invalid" (click)="onSubmit()">
+    Submit
+  </button>
+</form>

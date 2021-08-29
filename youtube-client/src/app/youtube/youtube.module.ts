@@ -8,6 +8,8 @@ import { SearchResultsComponent } from './components/search/search-results/searc
 import { ShortTitlePipe } from './pipes/short-title.pipe';
 import { DetailedInfoComponent } from './components/detailed-info/detailed-info.component';
 import { AuthGuard } from '../core/quards/auth.guard';
+import { SharedModule } from '../shared/shared.module';
+import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -17,13 +19,20 @@ import { AuthGuard } from '../core/quards/auth.guard';
     BottomColorDirective,
     FilterPipe,
     DetailedInfoComponent,
+    AdminComponent,
   ],
   imports: [
     CommonModule,
+    SharedModule,
     RouterModule.forChild([
       {
         path: '',
         component: SearchResultsComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'admin',
+        component: AdminComponent,
         canActivate: [AuthGuard],
       },
       {
@@ -36,6 +45,7 @@ import { AuthGuard } from '../core/quards/auth.guard';
   exports: [
     SearchResultsComponent,
     SearchItemComponent,
+    AdminComponent,
     ShortTitlePipe,
     BottomColorDirective,
     FilterPipe,
