@@ -69,7 +69,6 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       .subscribe((typeSort) => {
         this.typeSort = typeSort;
         this.sortByType();
-        this.sortByDirection();
       });
 
     this.searchService.isLoading$
@@ -82,38 +81,6 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroyed$.next();
     this.destroyed$.complete();
-  }
-
-  sortByDirection(): void {
-    if (this.typeSort === TypeSort.dateUp) {
-      this.response.items = this.response.items.sort(
-        (a: IItem, b: IItem) =>
-          Number(new Date(b.snippet.publishedAt)) -
-          Number(new Date(a.snippet.publishedAt))
-      );
-    }
-
-    if (this.typeSort === TypeSort.dateDown) {
-      this.response.items = this.response.items.sort(
-        (a: IItem, b: IItem) =>
-          Number(new Date(a.snippet.publishedAt)) -
-          Number(new Date(b.snippet.publishedAt))
-      );
-    }
-
-    if (this.typeSort === TypeSort.countViewsUp) {
-      this.response.items = this.response.items.sort(
-        (a: IItem, b: IItem) =>
-          Number(b.statistics.viewCount) - Number(a.statistics.viewCount)
-      );
-    }
-
-    if (this.typeSort === TypeSort.countViewsDown) {
-      this.response.items = this.response.items.sort(
-        (a: IItem, b: IItem) =>
-          Number(a.statistics.viewCount) - Number(b.statistics.viewCount)
-      );
-    }
   }
 
   sortByType(): void {
