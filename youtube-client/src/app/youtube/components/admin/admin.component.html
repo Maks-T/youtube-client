@@ -1,15 +1,42 @@
 <form [formGroup]="cardForm">
   <mat-form-field>
-    <input matInput placeholder="Title" formControlName="title" />
+    <input type="text" matInput placeholder="Title" formControlName="title" />
+    <mat-error *ngIf="cardForm.controls.title.invalid">{{
+      getTitleErrorMessage()
+    }}</mat-error>
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Description" formControlName="description" />
+    <input
+      type="text"
+      matInput
+      placeholder="Description"
+      formControlName="description"
+    />
+    <mat-error *ngIf="cardForm.controls.description.invalid">{{
+      getDescriptionErrorMessage()
+    }}</mat-error>
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Image Link" formControlName="imageLink" />
+    <input
+      type="url"
+      matInput
+      placeholder="Image Link"
+      formControlName="imageLink"
+    />
+    <mat-error *ngIf="cardForm.controls.imageLink.invalid">{{
+      getImageLinkErrorMessage()
+    }}</mat-error>
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Video Link" formControlName="videoLink" />
+    <input
+      type="url"
+      matInput
+      placeholder="Video Link"
+      formControlName="videoLink"
+    />
+    <mat-error *ngIf="cardForm.controls.videoLink.invalid">{{
+      getVideoLinkErrorMessage()
+    }}</mat-error>
   </mat-form-field>
   <button mat-raised-button [disabled]="cardForm.invalid" (click)="onSubmit()">
     Submit
