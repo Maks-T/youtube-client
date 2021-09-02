@@ -1,13 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { select, Store } from '@ngrx/store';
+import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { mockResponseNull } from 'src/app/app.constants';
+
 import { SearchService } from 'src/app/core/services/search.service';
+import { IAppState } from 'src/app/redux';
+import { SetYoutubeItems } from 'src/app/redux/actions/youtube.action';
+import { ICustomItem } from 'src/app/youtube/models/custom-item.model';
+import { getAllItems } from 'src/app/redux/selectors/items.selector';
 
 import { TypeSort } from '../../../../shared/models/type-sort.model';
 import { IItem } from '../../../models/search-item.model';
-import { IResponse } from '../../../models/search-response.model';
 
 @Component({
   selector: 'app-search-results',
@@ -15,7 +19,9 @@ import { IResponse } from '../../../models/search-response.model';
   styleUrls: ['./search-results.component.scss'],
 })
 export class SearchResultsComponent implements OnInit, OnDestroy {
-  response: IResponse = mockResponseNull;
+  // response: IResponse = mockResponseNull;
+
+  items$?: Observable<(IItem | ICustomItem)[]>;
 
   sortDateUp = false;
 
@@ -31,9 +37,18 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
   destroyed$ = new Subject<boolean>();
 
-  constructor(public searchService: SearchService, private router: Router) {}
+  constructor(
+    public searchService: SearchService,
+    private router: Router,
+    private store: Store<IAppState>,
+  ) {}
 
   ngOnInit() {
+    this.items$ = this.store.pipe(
+      takeUntil(this.destroyed$),
+      select(getAllItems),
+    );
+
     this.searchService.searchText$
       .pipe(takeUntil(this.destroyed$))
       .subscribe((searchText) => {
@@ -52,7 +67,6 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       .subscribe((typeSort) => {
         this.typeSort = typeSort;
         this.sortByType();
-        this.sortByDirection();
       });
 
     this.searchService.isLoading$
@@ -65,38 +79,6 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroyed$.next();
     this.destroyed$.complete();
-  }
-
-  sortByDirection(): void {
-    if (this.typeSort === TypeSort.dateUp) {
-      this.response.items = this.response.items.sort(
-        (a: IItem, b: IItem) =>
-          Number(new Date(b.snippet.publishedAt)) -
-          Number(new Date(a.snippet.publishedAt))
-      );
-    }
-
-    if (this.typeSort === TypeSort.dateDown) {
-      this.response.items = this.response.items.sort(
-        (a: IItem, b: IItem) =>
-          Number(new Date(a.snippet.publishedAt)) -
-          Number(new Date(b.snippet.publishedAt))
-      );
-    }
-
-    if (this.typeSort === TypeSort.countViewsUp) {
-      this.response.items = this.response.items.sort(
-        (a: IItem, b: IItem) =>
-          Number(b.statistics.viewCount) - Number(a.statistics.viewCount)
-      );
-    }
-
-    if (this.typeSort === TypeSort.countViewsDown) {
-      this.response.items = this.response.items.sort(
-        (a: IItem, b: IItem) =>
-          Number(a.statistics.viewCount) - Number(b.statistics.viewCount)
-      );
-    }
   }
 
   sortByType(): void {
@@ -122,10 +104,8 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
       const searchResult$ = this.searchService.fetchVideos(this.searchText);
 
       searchResult$.subscribe((res) => {
-        this.response = res;
+        this.store.dispatch(new SetYoutubeItems(res.items));
       });
-    } else {
-      this.response = JSON.parse(JSON.stringify(mockResponseNull));
     }
   }
 

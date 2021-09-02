@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { ICustomItem } from 'src/app/youtube/models/custom-item.model';
 import { IItem } from 'src/app/youtube/models/search-item.model';
 
 const countMillisecondInDay = 86400000;
@@ -13,7 +14,7 @@ const Medium = 182;
   styleUrls: ['./search-item.component.scss'],
 })
 export class SearchItemComponent {
-  @Input() item!: IItem;
+  @Input() item!: IItem | ICustomItem;
 
   constructor(private router: Router) {}
 
@@ -24,9 +25,11 @@ export class SearchItemComponent {
 
     if (dayDifference < Week) {
       return 'blue';
-    } if (dayDifference < Month) {
+    }
+    if (dayDifference < Month) {
       return 'green';
-    } if (dayDifference < Medium) {
+    }
+    if (dayDifference < Medium) {
       return 'yellow';
     }
     return 'red';

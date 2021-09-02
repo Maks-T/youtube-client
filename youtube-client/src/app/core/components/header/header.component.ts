@@ -7,7 +7,9 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { fromEvent, Subject } from 'rxjs';
-import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
+import {
+  debounceTime, filter, map, takeUntil,
+} from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 import { SearchService } from '../../services/search.service';
 
@@ -28,7 +30,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(
     public searchService: SearchService,
     private router: Router,
-    public authService: AuthService
+    public authService: AuthService,
   ) {}
 
   ngOnInit() {
@@ -37,7 +39,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         map((event: any) => event.target.value),
         filter((res) => res.length > 2),
         debounceTime(1000),
-        takeUntil(this.destroyed$)
+        takeUntil(this.destroyed$),
       )
       .subscribe((searchText: string) => {
         this.searchService.searchText$.next(searchText);
